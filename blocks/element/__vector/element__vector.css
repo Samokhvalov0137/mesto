@@ -1,5 +1,11 @@
 .element__vector{
     padding-right: 30px;
+    border: none;
+    background: no-repeat url(../../../images/Vector.svg);
+    width: 22px;
+    height: 19px;
+    cursor: pointer;
+    box-sizing: border-box;
   }
   
   .element__vector:hover{
