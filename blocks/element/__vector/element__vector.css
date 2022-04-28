@@ -1,0 +1,7 @@
+.element__vector{
+    padding-right: 30px;
+  }
+  
+  .element__vector:hover{
+    opacity: 0.2;
+    }

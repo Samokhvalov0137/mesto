@@ -1,0 +1,13 @@
+.popup__item{
+    border: 0;
+    width: 100%;
+    box-sizing: border-box;
+    border-bottom: 1px solid #000000;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 940px) {
+    .popup__item{
+        margin-bottom: 27px;
+    }
+}
