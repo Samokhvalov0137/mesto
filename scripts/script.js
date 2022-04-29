@@ -1,11 +1,11 @@
-const openPopupButton = document.querySelector('.profile__button_edit');
+const openPopupButton = document.querySelector('.profile__button-edit');
 const popup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__close');
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
 const formElement = document.querySelector('.form');
-const nameInput = document.querySelector('.popup__form_name');
-const jobInput = document.querySelector('.popup__form_status'); 
+const nameInput = document.querySelector('.popup__form-name');
+const jobInput = document.querySelector('.popup__form-status'); 
 const saveButton = document.querySelector('.form__submit-btn');
 
 // переменные 
