@@ -5,7 +5,7 @@
     height: 24px;
     align-self: center;
     border: 1px solid white;
-    background: no-repeat center url(../../../../images/Edit-button.svg);
+    background: no-repeat center url(../../../images/Edit-button.svg);
     box-sizing: border-box;
 }
 
