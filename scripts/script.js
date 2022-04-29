@@ -1,55 +1,38 @@
-const openPopupButton = document.querySelector('.button_edit');
+const openPopupButton = document.querySelector('.profile__button_edit');
 const popup = document.querySelector('.popup');
 const closePopupButton = document.querySelector('.popup__close');
+const profileName = document.querySelector('.profile__name');
+const profileStatus = document.querySelector('.profile__status');
+const formElement = document.querySelector('.form');
+const nameInput = document.querySelector('.popup__form_name');
+const jobInput = document.querySelector('.popup__form_status'); 
+const saveButton = document.querySelector('.form__submit-btn');
 
-function popupOpenToggle(){
-    popup.classList.toggle('popup_opened')
+// переменные 
+
+function openPopup(){
+    popup.classList.add('popup_opened');
 }
-
-openPopupButton.addEventListener('click', popupOpenToggle);
-
-closePopupButton.addEventListener('click', popupOpenToggle);
+// функция открытия попапа
 
 
-const addButton = document.querySelector('.button_add');
-addButton.addEventListener('click', () => {
-alert('Скоро эта кнопка заработает!')
-});
-
-let profileName = document.querySelector('.profile__name');
-//console.log(profileName.textContent);
+function closePopup(){
+    popup.classList.remove('popup_opened')
+}
+// функция закрытия попапа
 
 
+openPopupButton.addEventListener('click', openPopup);
+closePopupButton.addEventListener('click', closePopup);
+//saveButton.addEventListener('click', closePopup);
 
-let formElement = document.querySelector('.form');
-
-let nameInput = document.querySelector('.popup__form_name');
-//console.log(nameInput.value);
-let jobInput = document.querySelector('.popup__form_status'); 
-//console.log(jobInput.value);
 
 function formSubmitHandler (evt) {
-    evt.preventDefault(); // Эта строчка отменяет стандартную отправку формы.
-                                                // Так мы можем определить свою логику отправки.
-                                                // О том, как это делать, расскажем позже.
+    evt.preventDefault();
 
-  
-    let profileName = document.querySelector('.profile__name');
-    //console.log(profileName.textContent);
-
-    let profileStatus = document.querySelector('.profile__status');
-    //console.log(profileStatus.textContent);
-    
-    profileName.textContent = nameInput.value;
     profileStatus.textContent = jobInput.value;
-
-    let saveButton = document.querySelector('.form__submit-btn');
-    function closeForm(){
-        popup.classList.remove('popup_opened')
-    }
-    saveButton.addEventListener('click', closeForm)
+    profileName.textContent = nameInput.value;
+closePopup();
 }
-
-// Прикрепляем обработчик к форме:
-// он будет следить за событием “submit” - «отправка»
+// функция отправки и кнопки "сохранить"
 formElement.addEventListener('submit', formSubmitHandler);

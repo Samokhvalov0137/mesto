@@ -19,14 +19,14 @@
                 <div class="profile__info">
                     <div class="profile__container">
                         <h1 class="profile__name">Жак-Ив Кусто</h1>
-                        <button class="button button_edit">
+                        <button class="button profile__button_edit" type="button">
                         </button>
 
                     </div>
-                    <h2 class="profile__status">Исследователь океана</h2>
+                    <p class="profile__status">Исследователь океана</p>
                     
                 </div>
-                <button class="button button_add">
+                <button class="button profile__button_add" type="button">
                         
                 </button>
             </section>
@@ -36,7 +36,7 @@
                     <img class="element__photo" src="./images/karachaevsk.jpg" alt="карачаевск">
                     <div class="element__group">
                         <h2 class="element__title">Карачаевск</h2>
-                        <button type="button" class="element__vector element__vector_active"></button>
+                        <button type="button" class="element__vector"></button>
                     </div>
                 </article>
 
@@ -44,7 +44,7 @@
                     <img class="element__photo" src="./images/dombai.jpg" alt="Домбай">
                     <div class="element__group">
                         <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__vector element__vector_active"></button>
+                        <button type="button" class="element__vector"></button>
                     </div>
                 </article>
 
@@ -52,7 +52,7 @@
                     <img class="element__photo" src="./images/elbrus.jpg" alt="Эльбрус">
                     <div class="element__group">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__vector element__vector_active"></button>
+                        <button type="button" class="element__vector"></button>
                     </div>
                 </article>
 
@@ -60,7 +60,7 @@
                     <img class="element__photo" src="./images/dombai.jpg" alt="Домбай">
                     <div class="element__group">
                         <h2 class="element__title">Домбай</h2>
-                        <button type="button" class="element__vector element__vector_active"></button>
+                        <button type="button" class="element__vector"></button>
                     </div>
                 </article>
 
@@ -68,7 +68,7 @@
                     <img class="element__photo" src="./images/elbrus.jpg" alt="Эльбрус">
                     <div class="element__group">
                         <h2 class="element__title">Гора Эльбрус</h2>
-                        <button type="button" class="element__vector element__vector_active"></button>
+                        <button type="button" class="element__vector"></button>
                     </div>
                 </article>
 
@@ -76,7 +76,7 @@
                     <img class="element__photo" src="./images/karachaevsk.jpg" alt="карачаевск">
                     <div class="element__group">
                         <h2 class="element__title">Карачаево-Черкесия</h2>
-                        <button type="button" class="element__vector element__vector_active"></button>
+                        <button type="button" class="element__vector"></button>
                     </div>
                 </article>
             </section>
@@ -93,10 +93,10 @@
             </button>
                 <div class="popup__input">
                     <h2 class="popup__title">Редактировать профиль</h2>
-                    <form class="form">
-                      <input type="text" name="name" value="Жак-Ив Кусто" class="popup__item popup__text popup__form popup__form_name">
-                      <input type="text" name="status" value="Исследователь океана" class="popup__item popup__text popup__form popup__form_status">
-                      <button class="form__submit-text form__submit-btn form__submit-btn_action_add" type="submit">
+                    <form class="form" name="form">
+                      <input type="text" name="name" value="Жак-Ив Кусто" class="popup__item popup__form_name">
+                      <input type="text" name="status" value="Исследователь океана" class="popup__item popup__form_status">
+                      <button class="form__submit-btn" type="submit">
                         Сохранить
                       </button>
                     </form>

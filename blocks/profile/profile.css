@@ -17,5 +17,6 @@
     .profile{
         max-width: 400px;
         flex-direction: column;
+        padding-bottom: 36px;
     }
 }

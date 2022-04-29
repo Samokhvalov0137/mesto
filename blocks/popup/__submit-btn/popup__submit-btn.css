@@ -20,7 +20,6 @@
     @media screen and (max-width: 620px) {
         .form__submit-btn{
             width: 238px;
-            height: 46px;
         }
     }
     .form__submit-btn:hover{

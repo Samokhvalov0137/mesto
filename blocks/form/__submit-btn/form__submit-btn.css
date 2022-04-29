@@ -1,0 +1,16 @@
+.form__submit-btn{
+    font-family: 'Inter', ‘Arial’, sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 22px;
+    text-align: center;
+}
+
+@media screen and (max-width: 940px) {
+    .form__submit-btn{
+      font-size: 14px;
+      line-height: 17px;
+       margin: 25px 0 32px;
+    }
+}
