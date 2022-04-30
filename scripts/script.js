@@ -4,14 +4,15 @@ const closePopupButton = document.querySelector('.popup__close');
 const profileName = document.querySelector('.profile__name');
 const profileStatus = document.querySelector('.profile__status');
 const formElement = document.querySelector('.form');
-const nameInput = document.querySelector('.popup__form-name');
-const jobInput = document.querySelector('.popup__form-status'); 
-const saveButton = document.querySelector('.form__submit-btn');
+const nameInput = document.querySelector('input[name="form_name"]');
+const jobInput = document.querySelector('input[name="form_status"]');
 
 // переменные 
 
 function openPopup(){
     popup.classList.add('popup_opened');
+    nameInput.value = profileName.textContent;
+    jobInput.value = profileStatus.textContent;
 }
 // функция открытия попапа
 
