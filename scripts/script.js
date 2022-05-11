@@ -124,11 +124,11 @@ const initialCards = [
   };
 
 
-  const handleCheckTodoCard = (event) => {
+  const handleLikeCard = (event) => {
     event.target.closest('.element__vector').classList.toggle('element__vector_active');
   };
   
-  const handleDeleteTodoCard = (event) => {
+  const handleDeleteCard = (event) => {
     event.target.closest('.element').remove();
   };
 
@@ -155,11 +155,11 @@ const initialCards = [
 
   // like card
     const likeButton = newInitialCard.querySelector('.element__vector');
-    likeButton.addEventListener('click', handleCheckTodoCard);
+    likeButton.addEventListener('click', handleLikeCard);
 
   // delete card
     const deleteButton = newInitialCard.querySelector('.element__trash');
-    deleteButton.addEventListener('click', handleDeleteTodoCard);
+    deleteButton.addEventListener('click', handleDeleteCard);
   
     return newInitialCard;
   };
@@ -182,7 +182,7 @@ const initialCards = [
 
 // ПОПАП ПРОСМОТРА КАРТИНКИ
 
-const popupCardPhoto = document.querySelector('.popup__images');
+const popupCardPhoto = document.querySelector('.popup_images');
 const closePopupCardPhotoButton = document.querySelector('#popup-card__close');
 
 // функция открытия попапа с фото
