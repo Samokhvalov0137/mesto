@@ -44,22 +44,26 @@
         <button type="button" class="popup__close"></button>
         <div class="popup__input">
           <h2 class="popup__title">Редактировать профиль</h2>
-          <form class="form" name="form">
-            <input
-              type="text"
-              name="form_name"
-              placeholder="Имя"
-              value="Жак-Ив Кусто"
-              class="form__input"
-            />
-            <input
-              type="text"
-              name="form_status"
-              placeholder="О себе"
-              value="Исследователь океана"
-              class="form__input"
-            />
-            <button class="form__submit-btn" type="submit">Сохранить</button>
+          <form novalidate class="form" name="form-edit" id="form-edit">
+            <fieldset class="form__set">
+              <label class="form__field">
+                <input class="form__input" id="form_name" type="text" name="form_name" placeholder="Имя" value="Жак-Ив Кусто" 
+                  required
+                  minlength="2"
+                  maxlength="40"
+                />
+                <span id="error-form_name" class="error"></span>
+              </label>
+              <label class="form__field">
+                <input class="form__input" id="form_status" type="text" name="form_status" placeholder="О себе" value="Исследователь океана"
+                  required
+                  minlength="2"
+                  maxlength="200"
+                />
+                <span id="error-form_status" class="error"></span>
+              </label>
+              <button class="form__submit-btn" type="submit" id="form__edit-bth">Сохранить</button>
+            </fieldset>
           </form>
         </div>
       </div>
@@ -67,31 +71,23 @@
 
     <div class="popup" id="popup-add">
       <div class="popup__content">
-        <button
-          type="button"
-          class="popup__close"
-          id="popup-add__close"
-        ></button>
+        <button class="popup__close" id="popup-add__close" type="button"></button>
         <div class="popup__input">
           <h2 class="popup__title">Новое место</h2>
-          <form class="form" name="form" id="form__add">
-            <input
-              type="text"
-              name="form_name"
-              placeholder="Название"
-              class="form__input"
-              id="input_add_place"
-            />
-            <input
-              type="text"
-              name="form_status"
-              placeholder="Ссылка"
-              class="form__input"
-              id="input_add_link"
-            />
-            <button class="form__submit-btn" type="submit" id="form__add-bth">
-              Создать
-            </button>
+          <form novalidate class="form" name="form__add" id="form__add">
+            <fieldset class="form__set">
+              <label class="form__field">
+                <input class="form__input" id="input_add_place" type="text" name="form_name" placeholder="Название" required/>
+               <span id="error-input_add_place" class="error"></span>
+              </label>
+              <label class="form__field">
+                <input class="form__input" id="input_add_link" type="url" name="form_status" placeholder="Ссылка" required/>
+                <span id="error-input_add_link" class="error"></span>
+              </label>
+              <button class="form__submit-btn" type="submit" id="form__add-bth">
+                Создать
+              </button>
+            </fieldset>
           </form>
         </div>
       </div>
