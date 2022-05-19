@@ -27,11 +27,6 @@ const namePopupCard = document.querySelector(".popup__name");
 const popupCardPhoto = document.querySelector(".popup_images");
 const closePopupCardPhotoButton = document.querySelector("#popup-card__close");
 
-//валидация
-//const form = document.querySelector('.form');
-//const submit = document.querySelector('.form__submit-btn');
-//const name = document.querySelector('#form_name');
-//const status = document.querySelector('#form_status');
 
 // ФУНКЦИИ
 // функция открытия попапа
@@ -71,7 +66,6 @@ function closePopupOverlayClick(evt){
     closePopup(popupCardPhoto);
   }
 }
-
 
 
 // функция отправки и кнопки "сохранить" в попапе редактирования имени
