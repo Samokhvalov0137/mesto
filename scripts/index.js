@@ -1,8 +1,17 @@
 // ПЕРЕМЕННЫЕ
-const popup = document.querySelector('.popup');
+//const popup = document.querySelector('.popup');
+
+const validationData = {
+  formSelector: '.form',
+  inputSelector: '.form__input',
+  submitButtonSelector: '.form__submit-btn',
+  inactiveButtonClass: 'form__button_inactive',
+  inputErrorClass: 'form__input_type_error',
+};
+
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
 const popupEdit = document.querySelector("#popup-edit");
-const closePopupEditButton = document.querySelector(".popup__close");
+const popupCloseEditButton = document.querySelector(".popup__close");
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
 const formProfileEdit = document.querySelector("#form-edit");
@@ -10,8 +19,8 @@ const nameInput = document.querySelector('input[name="form_name"]');
 const jobInput = document.querySelector('input[name="form_status"]');
 // переменные попапа добавления карточки
 const popupCard = document.querySelector("#popup-add");
-const closePopupAddCard = document.querySelector("#popup-add__close");
-const openPopupAddCard = document.querySelector(".profile__button-add");
+const popupCloseAddCard = document.querySelector("#popup-add__close");
+const popupOpenAddCard = document.querySelector(".profile__button-add");
 // шаблоны
 const initialCardTemplate = document
   .querySelector("#elements__template")
@@ -25,9 +34,8 @@ const photoPopupCard = document.querySelector(".popup__image");
 const namePopupCard = document.querySelector(".popup__name");
 // попап просмотра картинки
 const popupCardPhoto = document.querySelector(".popup_images");
-const closePopupCardPhotoButton = document.querySelector("#popup-card__close");
-
-
+const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
+const buttonAddPhoto = document.querySelector('#form__add-bth')
 // ФУНКЦИИ
 // функция открытия попапа
 const openPopup = (popupName) => {
@@ -39,6 +47,7 @@ function handleOpenPopupEdit() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   openPopup(popupEdit);
+  
 }
 
 // функция закрытия попапа
@@ -79,13 +88,13 @@ function handleProfileFormSubmit(evt) {
 
 
 // функция открытия попапа добавления карточек
-openPopupAddCard.addEventListener("click", () => openPopup(popupCard));
+popupOpenAddCard.addEventListener("click", () => openPopup(popupCard));
 
 // функция закрытия попапа добавления карточек
-closePopupAddCard.addEventListener("click", () => closePopup(popupCard));
+popupCloseAddCard.addEventListener("click", () => closePopup(popupCard));
 
 // функция закрытия попапа с фото
-closePopupCardPhotoButton.addEventListener("click", () =>
+popupCloseCardPhotoButton.addEventListener("click", () =>
   closePopup(popupCardPhoto)
 );
 
@@ -112,31 +121,8 @@ const handleAddCardFormSubmit = (event) => {
   linkInput.value = "";
 
   closePopup(popupCard);
-};
-
-
-//функция показа ошибки
-const showInputError = (formElement, inputElement, errorMessage) => {
-  const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-  inputElement.classList.add('form__input_type_error');
-  errorElement.textContent = errorMessage;
-};
-
-// функция скрытия ошибки
-const hideInputError = (formElement, inputElement) => {
-  const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-  inputElement.classList.remove('form__input_type_error');
-  errorElement.textContent = '';
-};
-
-
-// функция проверки валидности
-const checkInputValidity = (formElement, inputElement) => {
-  if (!inputElement.validity.valid) {
-    showInputError(formElement, inputElement, inputElement.validationMessage);
-  } else {
-    hideInputError(formElement, inputElement);
-  }
+  
+  buttonAddPhoto.classList.add('form__button_inactive');
 };
 
 
@@ -145,7 +131,7 @@ const checkInputValidity = (formElement, inputElement) => {
 // кнопки открыть и закрыть для попапа редактирования
 buttonOpenPopupEdit.addEventListener("click", handleOpenPopupEdit);
 buttonOpenPopupEdit.addEventListener("click", () => openPopup(popupEdit));
-closePopupEditButton.addEventListener("click", () => closePopup(popupEdit));
+popupCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
 
 // слушатель кнопки "сохранить" в попапе редактирования имени
 formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
@@ -199,61 +185,6 @@ popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
 
 
-
-// 
-const setEventListeners = (formElement) => {
-  const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-  const buttonElement = formElement.querySelector('.form__submit-btn');
-
-  toggleButtonState(inputList, buttonElement);
-
-  inputList.forEach((inputElement) => {
-    inputElement.addEventListener('input', function () {
-      checkInputValidity(formElement, inputElement);
-      
-      toggleButtonState(inputList, buttonElement);
-    });
-  });
-};
-
-
-// функция переключения состояния кнопки
-const toggleButtonState = (inputList, buttonElement) =>{
-  if (hasInvalidInput(inputList)){
-    buttonElement.classList.add('form__button_inactive');
-  }else{
-    buttonElement.classList.remove('form__button_inactive');
-  };
-};
-
-
-// 
-const enableValidation = () => {
-  const formList = Array.from(document.querySelectorAll('.form'));
-  formList.forEach((formElement) => {
-    formElement.addEventListener('submit', function (evt) {
-      evt.preventDefault();
-    });
-    
-    const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
-   
-    fieldsetList.forEach((fieldSet) =>{
-     setEventListeners(fieldSet);  
-    });
-
-  });
-};
-
-
-//
-const hasInvalidInput = (inputList) =>{
-  return inputList.some((inputElement) => {
-  
-    return !inputElement.validity.valid;
-  })
-}; 
-
-enableValidation();
 
 
 // Слушатели закрытия оверлеем
