@@ -68,9 +68,6 @@ const showInputError = (formElement, inputElement, errorMessage) => {
   };
 
 
-  
-  
-  
   //
   const hasInvalidInput = (inputList) =>{
     return inputList.some((inputElement) => {
