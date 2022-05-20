@@ -1,14 +1,14 @@
 //функция показа ошибки
 const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-    inputElement.classList.add('form__input_type_error');
+    inputElement.classList.add(validationConfig.inputErrorClass);
     errorElement.textContent = errorMessage;
   };
   
   // функция скрытия ошибки
   const hideInputError = (formElement, inputElement) => {
     const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
-    inputElement.classList.remove('form__input_type_error');
+    inputElement.classList.remove(validationConfig.inputErrorClass);
     errorElement.textContent = '';
   };
   
@@ -24,9 +24,9 @@ const showInputError = (formElement, inputElement, errorMessage) => {
 
 
   // 
-const setEventListeners = (formElement) => {
-    const inputList = Array.from(formElement.querySelectorAll('.form__input'));
-    const buttonElement = formElement.querySelector('.form__submit-btn');
+  const setEventListeners = (formElement) => {
+    const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
+    const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   
     toggleButtonState(inputList, buttonElement);
   
@@ -43,29 +43,32 @@ const setEventListeners = (formElement) => {
   // функция переключения состояния кнопки
   const toggleButtonState = (inputList, buttonElement) =>{
     if (hasInvalidInput(inputList)){
-      buttonElement.classList.add('form__button_inactive');
+      buttonElement.classList.add(validationConfig.inactiveButtonClass);
     }else{
-      buttonElement.classList.remove('form__button_inactive');
+      buttonElement.classList.remove(validationConfig.inactiveButtonClass);
     };
   };
   
   
   // 
-  const enableValidation = () => {
-    const formList = Array.from(document.querySelectorAll('.form'));
+  const enableValidation = (validationConfig) => {
+    const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
     formList.forEach((formElement) => {
       formElement.addEventListener('submit', function (evt) {
         evt.preventDefault();
       });
       
-      const fieldsetList = Array.from(formElement.querySelectorAll('.form__set'));
+      const fieldsetList = Array.from(formElement.querySelectorAll(validationConfig.errorClass));
      
-      fieldsetList.forEach((fieldSet) =>{
-       setEventListeners(fieldSet);  
+      fieldsetList.forEach((formElement) =>{
+       setEventListeners(formElement);  
       });
   
     });
   };
+
+
+  
   
   
   //
@@ -76,6 +79,6 @@ const setEventListeners = (formElement) => {
     })
   }; 
   
-  enableValidation();
+  enableValidation(validationConfig);
   
   

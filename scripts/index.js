@@ -1,12 +1,13 @@
 // ПЕРЕМЕННЫЕ
 //const popup = document.querySelector('.popup');
 
-const validationData = {
+const validationConfig = {
   formSelector: '.form',
   inputSelector: '.form__input',
   submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: 'form__button_inactive',
-  inputErrorClass: 'form__input_type_error',
+  inactiveButtonClass: '.form__button_inactive',
+  inputErrorClass: '.form__input_type_error',
+  errorClass: '.form__set'
 };
 
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
@@ -37,8 +38,21 @@ const popupCardPhoto = document.querySelector(".popup_images");
 const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
 const buttonAddPhoto = document.querySelector('#form__add-bth')
 // ФУНКЦИИ
+
+//функция закрытия попапов по нажатию Esc
+
+function keydownHeandler (evt){
+  if (evt.key === 'Escape'){
+    const popupOpen = document.querySelector('.popup_opened')
+    closePopup(popupOpen);
+  }
+}
+
+
+
 // функция открытия попапа
 const openPopup = (popupName) => {
+  document.addEventListener('keydown', keydownHeandler);
   popupName.classList.add("popup_opened");
 };
 
@@ -53,26 +67,16 @@ function handleOpenPopupEdit() {
 // функция закрытия попапа
 
 const closePopup = (popupName) => {
+  document.removeEventListener('keydown',keydownHeandler);
   popupName.classList.remove("popup_opened");
 };
-
-
-//функция закрытия попапов по нажатию Esc
-document.addEventListener('keydown', function(event){
- if (event.key === 'Escape'){
-    closePopup(popupEdit);
-    closePopup(popupCard);
-    closePopup(popupCardPhoto);
-  }
-});
 
 
 //функция закрытия попапа оверлеем
 function closePopupOverlayClick(evt){
   if (evt.target === evt.currentTarget){
-    closePopup(popupEdit);
-    closePopup(popupCard);
-    closePopup(popupCardPhoto);
+    const popupOpen = document.querySelector('.popup_opened')
+    closePopup(popupOpen);
   }
 }
 
@@ -181,9 +185,6 @@ initialCards.forEach((initialData) => {
 });
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
-
-
-
 
 
 
