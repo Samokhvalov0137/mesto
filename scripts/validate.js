@@ -28,28 +28,52 @@ const showInputError = (formElement, inputElement, errorMessage) => {
     const inputList = Array.from(formElement.querySelectorAll(validationConfig.inputSelector));
     const buttonElement = formElement.querySelector(validationConfig.submitButtonSelector);
   
-    toggleButtonState(inputList, buttonElement);
+    toggleButtonState(inputList, buttonElement, validationConfig.inactiveButtonClass);
   
     inputList.forEach((inputElement) => {
       inputElement.addEventListener('input', function () {
         checkInputValidity(formElement, inputElement);
         
-        toggleButtonState(inputList, buttonElement);
+        toggleButtonState(inputList, buttonElement, validationConfig.inactiveButtonClass);
       });
     });
   };
   
+
+
+// функция переключения состояния кнопки
+
+  function enableSubmitButton(buttonElement) {
+    buttonElement.classList.remove('form__button_inactive');
+    buttonElement.removeAttribute("disabled");
+  }
+  
+  function disableSubmitButton(buttonElement) {
+    buttonElement.classList.add('form__button_inactive');
+    buttonElement.setAttribute("disabled", true);
+  }
+  
+  function toggleButtonState(inputList, buttonElement, validationConfig) {
+    if (hasInvalidInput(inputList)) {
+      disableSubmitButton(buttonElement, validationConfig);
+    } else {
+      enableSubmitButton(buttonElement, validationConfig);
+    }
+  }
+
   
   // функция переключения состояния кнопки
-  const toggleButtonState = (inputList, buttonElement) =>{
-    if (hasInvalidInput(inputList)){
-      buttonElement.classList.add(validationConfig.inactiveButtonClass);
-    }else{
-      buttonElement.classList.remove(validationConfig.inactiveButtonClass);
-    };
-  };
-  
-  
+  //const toggleButtonState = (inputList, buttonElement) =>{
+   // if (hasInvalidInput(inputList)){
+   //   buttonElement.classList.add('form__button_inactive');
+   // }else{
+   //   buttonElement.classList.remove('form__button_inactive');
+  //  };
+  //};
+
+
+
+
   // 
   const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
