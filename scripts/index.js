@@ -127,7 +127,8 @@ const handleAddCardFormSubmit = (event) => {
   closePopup(popupCard);
   
   //buttonAddPhoto.classList.add('form__button_inactive');
-  disableSubmitButton(buttonAddPhoto);
+  
+  disableSubmitButton(buttonAddPhoto); 
 };
 
 
