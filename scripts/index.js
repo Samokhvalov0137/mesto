@@ -2,12 +2,12 @@
 //const popup = document.querySelector('.popup');
 
 const validationConfig = {
-  formSelector: '.form',
-  inputSelector: '.form__input',
-  submitButtonSelector: '.form__submit-btn',
-  inactiveButtonClass: '.form__button_inactive',
-  inputErrorClass: '.form__input_type_error',
-  errorClass: '.form__set'
+  formSelector: ".form",
+  inputSelector: ".form__input",
+  submitButtonSelector: ".form__submit-btn",
+  inactiveButtonClass: ".form__button_inactive",
+  inputErrorClass: ".form__input_type_error",
+  errorClass: ".form__set",
 };
 
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
@@ -23,11 +23,11 @@ const popupCard = document.querySelector("#popup-add");
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
 // шаблоны
-const initialCardTemplate = document
-  .querySelector("#elements__template")
-  .content.querySelector(".element");
+// const initialCardTemplate = document
+//   .querySelector("#elements__template")
+//   .content.querySelector(".element");
 // ДОМ элементы
-const initialContainer = document.querySelector(".elements");
+//const initialContainer = document.querySelector(".elements");
 const popupFormAdd = document.querySelector("#form__add");
 const placeInput = document.querySelector("#input_add_place");
 const linkInput = document.querySelector("#input_add_link");
@@ -36,23 +36,21 @@ const namePopupCard = document.querySelector(".popup__name");
 // попап просмотра картинки
 const popupCardPhoto = document.querySelector(".popup_images");
 const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
-const buttonAddPhoto = document.querySelector('#form__add-bth')
+const buttonAddPhoto = document.querySelector("#form__add-bth");
 // ФУНКЦИИ
 
 //функция закрытия попапов по нажатию Esc
 
-function keydownHeandler (evt){
-  if (evt.key === 'Escape'){
-    const popupOpen = document.querySelector('.popup_opened')
+function keydownHeandler(evt) {
+  if (evt.key === "Escape") {
+    const popupOpen = document.querySelector(".popup_opened");
     closePopup(popupOpen);
   }
 }
 
-
-
 // функция открытия попапа
 const openPopup = (popupName) => {
-  document.addEventListener('keydown', keydownHeandler);
+  document.addEventListener("keydown", keydownHeandler);
   popupName.classList.add("popup_opened");
 };
 
@@ -61,25 +59,22 @@ function handleOpenPopupEdit() {
   nameInput.value = profileName.textContent;
   jobInput.value = profileStatus.textContent;
   openPopup(popupEdit);
-  
 }
 
 // функция закрытия попапа
 
 const closePopup = (popupName) => {
-  document.removeEventListener('keydown',keydownHeandler);
+  document.removeEventListener("keydown", keydownHeandler);
   popupName.classList.remove("popup_opened");
 };
 
-
 //функция закрытия попапа оверлеем
-function closePopupOverlayClick(evt){
-  if (evt.target === evt.currentTarget){
-    const popupOpen = document.querySelector('.popup_opened')
+function closePopupOverlayClick(evt) {
+  if (evt.target === evt.currentTarget) {
+    const popupOpen = document.querySelector(".popup_opened");
     closePopup(popupOpen);
   }
 }
-
 
 // функция отправки и кнопки "сохранить" в попапе редактирования имени
 function handleProfileFormSubmit(evt) {
@@ -89,7 +84,6 @@ function handleProfileFormSubmit(evt) {
   profileName.textContent = nameInput.value;
   closePopup(popupEdit);
 }
-
 
 // функция открытия попапа добавления карточек
 popupOpenAddCard.addEventListener("click", () => openPopup(popupCard));
@@ -125,12 +119,9 @@ const handleAddCardFormSubmit = (event) => {
   linkInput.value = "";
 
   closePopup(popupCard);
-  
-  //buttonAddPhoto.classList.add('form__button_inactive');
-  
-  disableSubmitButton(buttonAddPhoto); 
-};
 
+  disableSubmitButton(buttonAddPhoto);
+};
 
 // ОБРАБОТЧИКИ СОБЫТИЙ
 
@@ -144,27 +135,26 @@ formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
 
 //генерация карточки
 
-const generateCard = (initialData) => {
-  const newInitialCard = initialCardTemplate.cloneNode(true);
+// const generateCard = (initialData) => {
+//   const newInitialCard = initialCardTemplate.cloneNode(true);
 
-  const elementTitle = newInitialCard.querySelector(".element__title");
-  elementTitle.textContent = initialData.name;
+//   const elementTitle = newInitialCard.querySelector(".element__title");
+//   elementTitle.textContent = initialData.name;
 
-  const elementPhoto = newInitialCard.querySelector(".element__photo");
-  elementPhoto.src = initialData.link;
-  elementPhoto.alt = initialData.name;
-
+//   const elementPhoto = newInitialCard.querySelector(".element__photo");
+//   elementPhoto.src = initialData.link;
+//   elementPhoto.alt = initialData.name;
 
   // функция нажатия на картинку в карточке
-  function hendleTapCard (){
+  function hendleTapCard() {
     photoPopupCard.src = initialData.link;
     namePopupCard.textContent = initialData.name;
     photoPopupCard.alt = initialData.name;
-  
-    openPopup(popupCardPhoto);
-  };
 
-  elementPhoto.addEventListener("click",hendleTapCard);
+    openPopup(popupCardPhoto);
+  }
+
+  elementPhoto.addEventListener("click", hendleTapCard);
 
   // like card
   const likeButton = newInitialCard.querySelector(".element__vector");
@@ -178,20 +168,18 @@ const generateCard = (initialData) => {
 };
 
 //Рендер карточки
-const renderCard = (initialData) => {
-  initialContainer.prepend(generateCard(initialData));
-};
+// const renderCard = (initialData) => {
+//   initialContainer.prepend(generateCard(initialData));
+// };
 
-initialCards.forEach((initialData) => {
-  renderCard(initialData);
-});
+// initialCards.forEach((initialData) => {
+//   renderCard(initialData);
+// });
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
-
-
 // Слушатели закрытия оверлеем
 
-popupEdit.addEventListener('mousedown', closePopupOverlayClick); 
-popupCard.addEventListener('mousedown', closePopupOverlayClick); 
-popupCardPhoto.addEventListener('mousedown', closePopupOverlayClick); 
+popupEdit.addEventListener("mousedown", closePopupOverlayClick);
+popupCard.addEventListener("mousedown", closePopupOverlayClick);
+popupCardPhoto.addEventListener("mousedown", closePopupOverlayClick);
