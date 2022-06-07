@@ -1,5 +1,4 @@
 //функция показа ошибки
-( function (){
     const showInputError = (formElement, inputElement, errorMessage) => {
     const errorElement = formElement.querySelector(`#error-${inputElement.id}`);
     inputElement.classList.add(validationConfig.inputErrorClass);
@@ -62,19 +61,6 @@
     }
   }
 
-  
-  // функция переключения состояния кнопки
-  //const toggleButtonState = (inputList, buttonElement) =>{
-   // if (hasInvalidInput(inputList)){
-   //   buttonElement.classList.add('form__button_inactive');
-   // }else{
-   //   buttonElement.classList.remove('form__button_inactive');
-  //  };
-  //};
-
-
-
-
   // 
   const enableValidation = (validationConfig) => {
     const formList = Array.from(document.querySelectorAll(validationConfig.formSelector));
@@ -102,4 +88,3 @@
   }; 
   
   enableValidation(validationConfig);
-})();

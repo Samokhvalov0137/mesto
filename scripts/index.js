@@ -27,15 +27,13 @@ const popupOpenAddCard = document.querySelector(".profile__button-add");
 //   .querySelector("#elements__template")
 //   .content.querySelector(".element");
 // ДОМ элементы
-//const initialContainer = document.querySelector(".elements");
+const initialContainer = document.querySelector(".elements");
 const popupFormAdd = document.querySelector("#form__add");
 const placeInput = document.querySelector("#input_add_place");
 const linkInput = document.querySelector("#input_add_link");
-const photoPopupCard = document.querySelector(".popup__image");
-const namePopupCard = document.querySelector(".popup__name");
+
 // попап просмотра картинки
-const popupCardPhoto = document.querySelector(".popup_images");
-const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
+
 const buttonAddPhoto = document.querySelector("#form__add-bth");
 // ФУНКЦИИ
 
@@ -54,6 +52,14 @@ const openPopup = (popupName) => {
   popupName.classList.add("popup_opened");
 };
 
+// функция закрытия попапа
+
+const closePopup = (popupName) => {
+  document.removeEventListener("keydown", keydownHeandler);
+  popupName.classList.remove("popup_opened");
+};
+
+
 // функция для подставления значений в попап редактирования
 function handleOpenPopupEdit() {
   nameInput.value = profileName.textContent;
@@ -61,12 +67,6 @@ function handleOpenPopupEdit() {
   openPopup(popupEdit);
 }
 
-// функция закрытия попапа
-
-const closePopup = (popupName) => {
-  document.removeEventListener("keydown", keydownHeandler);
-  popupName.classList.remove("popup_opened");
-};
 
 //функция закрытия попапа оверлеем
 function closePopupOverlayClick(evt) {
@@ -91,26 +91,11 @@ popupOpenAddCard.addEventListener("click", () => openPopup(popupCard));
 // функция закрытия попапа добавления карточек
 popupCloseAddCard.addEventListener("click", () => closePopup(popupCard));
 
-// функция закрытия попапа с фото
-popupCloseCardPhotoButton.addEventListener("click", () =>
-  closePopup(popupCardPhoto)
-);
-
-// функция для лайка
-const handleLikeCard = (event) => {
-  event.target.classList.toggle("element__vector_active");
-};
-
-// функция для корзины
-const handleDeleteCard = (event) => {
-  event.target.closest(".element").remove();
-};
-
 // функция отправки формы для создания карточек
 const handleAddCardFormSubmit = (event) => {
   event.preventDefault();
 
-  renderCard({
+  createCard({
     name: placeInput.value,
     link: linkInput.value,
   });
@@ -135,46 +120,22 @@ formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
 
 //генерация карточки
 
-// const generateCard = (initialData) => {
-//   const newInitialCard = initialCardTemplate.cloneNode(true);
+// функция сздания карточек и прохождение по массиву с данными
 
-//   const elementTitle = newInitialCard.querySelector(".element__title");
-//   elementTitle.textContent = initialData.name;
-
-//   const elementPhoto = newInitialCard.querySelector(".element__photo");
-//   elementPhoto.src = initialData.link;
-//   elementPhoto.alt = initialData.name;
-
-  // функция нажатия на картинку в карточке
-  function hendleTapCard() {
-    photoPopupCard.src = initialData.link;
-    namePopupCard.textContent = initialData.name;
-    photoPopupCard.alt = initialData.name;
-
-    openPopup(popupCardPhoto);
-  }
-
-  elementPhoto.addEventListener("click", hendleTapCard);
-
-  // like card
-  const likeButton = newInitialCard.querySelector(".element__vector");
-  likeButton.addEventListener("click", handleLikeCard);
-
-  // delete card
-  const deleteButton = newInitialCard.querySelector(".element__trash");
-  deleteButton.addEventListener("click", handleDeleteCard);
-
-  return newInitialCard;
+function createCard(initialData){
+  const card = new Card (initialData, '#elements__template');
+  const cardElement = card.generationCard();
+  
+  document.querySelector('.elements').prepend(cardElement);
 };
 
-//Рендер карточки
-// const renderCard = (initialData) => {
-//   initialContainer.prepend(generateCard(initialData));
-// };
-
-// initialCards.forEach((initialData) => {
-//   renderCard(initialData);
-// });
+initialCards.forEach((initialData) => {
+  createCard(initialData);
+  // const card = new Card (initialData, '#elements__template');
+  // const cardElement = card.generationCard();
+  
+  // document.querySelector('.elements').prepend(cardElement);
+});
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
