@@ -1,5 +1,5 @@
 // массив карточек с фото и названиями
-export const initialCards = [
+const initialCards = [
   {
     name: "Архыз",
     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
@@ -26,11 +26,12 @@ export const initialCards = [
   },
 ];
 
-export class Card {
-  constructor(data, cardSelector) {
+class Card {
+  constructor(data, cardSelector, handleImageClick) {
     this._name = data.name;
     this._link = data.link;
     this._cardSelector = cardSelector;
+    this._handleImageClick = handleImageClick;
   }
 
   _getTemplate() {
@@ -61,13 +62,10 @@ export class Card {
 
   // слушатели
   _setEventListeners() {
-    this._photoCard.addEventListener("click", () => {
-      this._handleOpenPopup();
-    });
 
-    popupCloseCardPhotoButton.addEventListener("click", () => {
-      this._handleClosePopup();
-    });
+  this._photoCard.addEventListener('click', () => {
+    this._handleImageClick(this._link, this._name)
+  });
 
     this._cardLike.addEventListener("click", () => {
       this._handleLikeCard();
@@ -78,20 +76,6 @@ export class Card {
     });
   }
 
-  // метод открытия попапа карточки
-  _handleOpenPopup() {
-    photoPopupCard.src = this._link;
-    namePopupCard.textContent = this._name;
-    photoPopupCard.alt = this._name;
-
-    openPopup(popupCardPhoto);
-  }
-
-  //метод закрытия попапа карточки
-  _handleClosePopup() {
-    photoPopupCard.src = "";
-    closePopup(popupCardPhoto);
-  }
 
   // метод для лайка
   _handleLikeCard() {
@@ -103,3 +87,5 @@ export class Card {
     this._element.remove();
   }
 }
+
+export { initialCards, Card }

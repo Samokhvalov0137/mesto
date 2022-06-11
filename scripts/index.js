@@ -1,5 +1,3 @@
-// import {initialCards, Card} from './Card.js';
-// import {FormValidator} from './FormValidator.js';
 import { initialCards, Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 
@@ -29,7 +27,7 @@ const popupOpenAddCard = document.querySelector(".profile__button-add");
 // шаблоны
 
 // ДОМ элементы
-const initialContainer = document.querySelector(".elements");
+//const initialContainer = document.querySelector(".elements");
 const popupFormAdd = document.querySelector("#form__add");
 const placeInput = document.querySelector("#input_add_place");
 const linkInput = document.querySelector("#input_add_link");
@@ -42,7 +40,7 @@ const photoPopupCard = document.querySelector(".popup__image");
 const namePopupCard = document.querySelector(".popup__name");
 const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
 
-//const formValidators = {};
+
 // ФУНКЦИИ
 
 //функция закрытия попапов по нажатию Esc
@@ -61,7 +59,6 @@ const openPopup = (popupName) => {
 };
 
 // функция закрытия попапа
-
 const closePopup = (popupName) => {
   document.removeEventListener("keydown", keydownHeandler);
   popupName.classList.remove("popup_opened");
@@ -91,11 +88,26 @@ function handleProfileFormSubmit(evt) {
   closePopup(popupEdit);
 }
 
+//функция открытия попапа с картинкой
+function hendleTapCard (link, name){
+  photoPopupCard.src = link;
+  namePopupCard.textContent = name;
+  photoPopupCard.alt = name;
+
+  openPopup(popupCardPhoto);
+};
+
+// функция закрытия попапа с катинкой
+popupCloseCardPhotoButton.addEventListener("click", () =>
+  closePopup(popupCardPhoto)
+);
+
 // функция открытия попапа добавления карточек
 popupOpenAddCard.addEventListener("click", () => openPopup(popupCard));
 
 // функция закрытия попапа добавления карточек
 popupCloseAddCard.addEventListener("click", () => closePopup(popupCard));
+
 
 // функция отправки формы для создания карточек
 const handleAddCardFormSubmit = (event) => {
@@ -112,14 +124,15 @@ const handleAddCardFormSubmit = (event) => {
   closePopup(popupCard);
 
   disableSubmitButton(buttonAddPhoto);
+  debugger;
 };
 
 
 //генерация карточки
-// функция сздания карточек и прохождение по массиву с данными
+// функция создания карточек и прохождение по массиву с данными
 
 function createCard(initialData) {
-  const card = new Card(initialData, "#elements__template");
+  const card = new Card(initialData, "#elements__template", hendleTapCard);
   const cardElement = card.generationCard();
 
   document.querySelector(".elements").prepend(cardElement);
@@ -129,12 +142,8 @@ initialCards.forEach((initialData) => {
   createCard(initialData);
 });
 
-// const validateFormProfile = new FormValidator(validationConfig, formProfile);
-// validateFormProfile.enableValidation();
-// const validateFormCard = new FormValidator(validationConfig, formPhoto);
-// validateFormCard.enableValidation();
 
-
+// функция валидации
 function enableValidation(object) {
   const formList = Array.from(
     document.querySelectorAll(object.formSelector)
@@ -147,8 +156,10 @@ function enableValidation(object) {
 enableValidation(validationConfig);
 
 
-
 // ОБРАБОТЧИКИ СОБЫТИЙ
+
+//слушатель открытия попапа с картинкой
+photoPopupCard.addEventListener("click",hendleTapCard);
 
 // кнопки открыть и закрыть для попапа редактирования
 buttonOpenPopupEdit.addEventListener("click", handleOpenPopupEdit);
@@ -157,6 +168,7 @@ popupCloseEditButton.addEventListener("click", () => closePopup(popupEdit));
 
 // слушатель кнопки "сохранить" в попапе редактирования имени
 formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
+
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
