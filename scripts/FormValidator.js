@@ -54,18 +54,6 @@ class FormValidator {
       return !inputElement.validity.valid;
     });
   }
-
-  // функция переключения состояния кнопки
-  // toggleButtonState = () => {
-  //   if (this._hasInvalidInput()) {
-  //     this._buttonElement.disabled = true; 
-  //     this._buttonElement.classList.add(this._inactiveButtonClass); 
-  //   } else { 
-  //     this._buttonElement.disabled = false;
-  //     this._buttonElement.classList.remove(this._inactiveButtonClass);
-  //   }
-  // };
-
   
 
   _enableSubmitButton() {
