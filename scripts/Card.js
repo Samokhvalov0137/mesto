@@ -1,30 +1,30 @@
-// массив карточек с фото и названиями
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+// // массив карточек с фото и названиями
+// const initialCards = [
+//   {
+//     name: "Архыз",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+//   },
+//   {
+//     name: "Челябинская область",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+//   },
+//   {
+//     name: "Иваново",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+//   },
+//   {
+//     name: "Камчатка",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+//   },
+//   {
+//     name: "Холмогорский район",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+//   },
+//   {
+//     name: "Байкал",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+//   },
+// ];
 
 class Card {
   constructor(data, cardSelector, handleImageClick) {
@@ -47,13 +47,14 @@ class Card {
   generationCard() {
     this._element = this._getTemplate();
 
-    this._element.querySelector(".element__title").textContent = this._name;
-    this._element.querySelector(".element__photo").src = this._link;
-    this._element.querySelector(".element__photo").alt = this._name;
-
     this._photoCard = this._element.querySelector(".element__photo");
     this._cardLike = this._element.querySelector(".element__vector");
     this._cardTrash = this._element.querySelector(".element__trash");
+
+    
+    this._element.querySelector(".element__title").textContent = this._name;
+    this._photoCard.src = this._link;
+    this._photoCard.alt = this._name;
 
     this._setEventListeners();
 
@@ -85,7 +86,8 @@ class Card {
   // метод удаления карточки
   _handleDeleteCard() {
     this._element.remove();
+    this._element = null;
   }
 }
 
-export { initialCards, Card }
+export { Card }

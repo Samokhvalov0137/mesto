@@ -1,4 +1,5 @@
-import { initialCards, Card } from "./Card.js";
+import { initialCards } from "./constants.js";
+import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
 
 // ПЕРЕМЕННЫЕ
@@ -7,9 +8,9 @@ const validationConfig = {
   formSelector: ".form",
   inputSelector: ".form__input",
   submitButtonSelector: ".form__submit-btn",
-  inactiveButtonClass: ".form__button_inactive",
-  inputErrorClass: ".form__input_type_error",
-  errorClass: ".form__set",
+  inactiveButtonClass: "form__button_inactive",
+  inputErrorClass: "form__input_type_error",
+  errorClass: "form__set",
 };
 
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
@@ -24,6 +25,7 @@ const jobInput = document.querySelector('input[name="form_status"]');
 const popupCard = document.querySelector("#popup-add");
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
+const elementsCard = document.querySelector(".elements");
 // шаблоны
 
 // ДОМ элементы
@@ -40,7 +42,7 @@ const photoPopupCard = document.querySelector(".popup__image");
 const namePopupCard = document.querySelector(".popup__name");
 const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
 
-
+const resetValidation = {};
 // ФУНКЦИИ
 
 //функция закрытия попапов по нажатию Esc
@@ -74,8 +76,8 @@ function handleOpenPopupEdit() {
 //функция закрытия попапа оверлеем
 function closePopupOverlayClick(evt) {
   if (evt.target === evt.currentTarget) {
-    const popupOpen = document.querySelector(".popup_opened");
-    closePopup(popupOpen);
+    //const popupOpen = document.querySelector(".popup_opened");
+    closePopup(evt.currentTarget);
   }
 }
 
@@ -86,6 +88,7 @@ function handleProfileFormSubmit(evt) {
   profileStatus.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
   closePopup(popupEdit);
+  resetValidation [ formProfileEdit.name ].toggleButtonState();
 }
 
 //функция открытия попапа с картинкой
@@ -123,7 +126,7 @@ const handleAddCardFormSubmit = (event) => {
 
   closePopup(popupCard);
 
-  disableSubmitButton(buttonAddPhoto);
+  resetValidation [ popupFormAdd.name ].toggleButtonState();
   debugger;
 };
 
@@ -133,9 +136,8 @@ const handleAddCardFormSubmit = (event) => {
 
 function createCard(initialData) {
   const card = new Card(initialData, "#elements__template", hendleTapCard);
-  const cardElement = card.generationCard();
 
-  document.querySelector(".elements").prepend(cardElement);
+  elementsCard.prepend(card.generationCard());
 }
 
 initialCards.forEach((initialData) => {
@@ -150,6 +152,7 @@ function enableValidation(object) {
   );
   formList.forEach((formElement) => {
     const validator = new FormValidator(object, formElement);
+    resetValidation [ formElement.name ] = validator;
     validator.enableValidation()
   });
 }
