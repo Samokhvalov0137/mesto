@@ -1,6 +1,7 @@
 import { initialCards } from "./constants.js";
 import { Card } from "./Card.js";
 import { FormValidator } from "./FormValidator.js";
+import { Section } from "./Section.js";
 
 // ПЕРЕМЕННЫЕ
 
@@ -25,7 +26,7 @@ const jobInput = document.querySelector('input[name="form_status"]');
 const popupCard = document.querySelector("#popup-add");
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
-const elementsCard = document.querySelector(".elements");
+const elementsCard = ".elements";
 // шаблоны
 
 // ДОМ элементы
@@ -115,16 +116,18 @@ popupCloseAddCard.addEventListener("click", () => closePopup(popupCard));
 const handleAddCardFormSubmit = (event) => {
   event.preventDefault();
 
-  renderCard({
+  const newCard = createCard({
     name: placeInput.value,
     link: linkInput.value,
   });
+
+  section.addItem(newCard);
 
   placeInput.value = "";
   linkInput.value = "";
 
   closePopup(popupCard);
-
+  //section.addItem(card);
   resetValidation[popupFormAdd.name].toggleButtonState();
 };
 
@@ -137,15 +140,25 @@ function createCard(initialData) {
   return card.generationCard();
 }
 
-initialCards.forEach((initialData) => {
-  // createCard(initialData);
-  renderCard(initialData);
-});
+// initialCards.forEach((initialData) => {
+//   // createCard(initialData);
+//   renderCard(initialData);
+// });
 
-function renderCard(initialData) {
-  const newCard = createCard(initialData);
-  elementsCard.prepend(newCard);
-}
+// function renderCard(initialData) {
+//   const newCard = createCard(initialData);
+//   elementsCard.prepend(newCard);
+// }
+
+const section = new Section ({
+  items: initialCards,
+  renderer: (item) => {
+    const newCard = createCard(item);
+    section.addItem(newCard)
+  },
+}, elementsCard)
+
+section.renderItems();
 
 // функция валидации
 function enableValidation(object) {
@@ -156,6 +169,8 @@ function enableValidation(object) {
     validator.enableValidation();
   });
 }
+
+
 enableValidation(validationConfig);
 
 // ОБРАБОТЧИКИ СОБЫТИЙ
