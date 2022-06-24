@@ -93,8 +93,9 @@ const resetValidation = {};
 
 // функция для подставления значений в попап редактирования
 function handleOpenPopupEdit() {
-  nameInput.value = profileName.textContent;
-  jobInput.value = profileStatus.textContent;
+  const userData = userInfo.getUserInfo();
+  nameInput.value = userData.userName;
+  jobInput.value = userData.userJob;
   popupEdit.open();
 }
 
@@ -126,7 +127,7 @@ function handleProfileFormSubmit(evt) {
 
 //   openPopup(popupCardPhoto);
 // }
-function hendleTapCard(link, name) {
+function handleCardClick(link, name) {
   popupCardPhoto.open({ link: link, name: name });
 }
 
@@ -164,7 +165,7 @@ const handleAddCardFormSubmit = (event) => {
 // функция создания карточек и прохождение по массиву с данными
 
 function createCard(initialData) {
-  const card = new Card(initialData, "#elements__template", hendleTapCard);
+  const card = new Card(initialData, "#elements__template", handleCardClick);
   //elementsCard.prepend(card.generationCard());
   return card.generationCard();
 }
@@ -207,7 +208,12 @@ enableValidation(validationConfig);
 const popupCardPhoto = new PopupWithImage(popupImageSelector);
 popupCardPhoto.setEventListeners();
 
-const popupEdit = new PopupWithForm(popupEditSelector, handleProfileFormSubmit);
+const popupEdit = new PopupWithForm(popupEditSelector, 
+  {handleProfileFormSubmit: (data) => {
+    userInfo.setUserInfo(data)
+    popupEdit.close()
+  }
+  });
 popupEdit.setEventListeners();
 
 const popupCard = new PopupWithForm(popupAddSelector, handleAddCardFormSubmit);
@@ -232,6 +238,6 @@ popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
 // Слушатели закрытия оверлеем
 
-popupEdit.addEventListener("mousedown", closePopupOverlayClick);
-popupCard.addEventListener("mousedown", closePopupOverlayClick);
-popupCardPhoto.addEventListener("mousedown", closePopupOverlayClick);
+// popupEdit.addEventListener("mousedown", closePopupOverlayClick);
+// popupCard.addEventListener("mousedown", closePopupOverlayClick);
+// popupCardPhoto.addEventListener("mousedown", closePopupOverlayClick);
