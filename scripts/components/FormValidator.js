@@ -23,11 +23,9 @@ class FormValidator {
     inputElement.classList.add(this._inputErrorClass);
     errorElement.textContent = inputElement.validationMessage;
     errorElement.classList.add(this._errorClass);
-    
-  }
+  };
 
-    
-// спрятать сообщение об ошибке
+  // спрятать сообщение об ошибке
   _hideInputError = (inputElement) => {
     const errorElement = this._formElement.querySelector(
       `#error-${inputElement.id}`
@@ -35,26 +33,23 @@ class FormValidator {
     inputElement.classList.remove(this._inputErrorClass);
     errorElement.classList.remove(this._errorClass);
     errorElement.textContent = "";
-  }
+  };
 
-// проверка нужно ли выводить сообщение об ошибке. Если поле ввода не валидно, то вызови функцию вывода сообщения об ошибки
-// если поле ввода валидно, то скрой сообщение об ошибке
+  // проверка нужно ли выводить сообщение об ошибке. Если поле ввода не валидно, то вызови функцию вывода сообщения об ошибки
+  // если поле ввода валидно, то скрой сообщение об ошибке
   _checkInputValidity = (inputElement) => {
     if (!inputElement.validity.valid) {
       this._showInputError(inputElement);
     } else {
       this._hideInputError(inputElement);
     }
-  }
-
+  };
 
   _hasInvalidInput = () => {
-    //this._checkInputValidity(inputElement);
     return this._inputList.some((inputElement) => {
       return !inputElement.validity.valid;
     });
-  }
-  
+  };
 
   _enableSubmitButton() {
     this._buttonElement.classList.remove(this._inactiveButtonClass);
@@ -74,20 +69,18 @@ class FormValidator {
     }
   }
 
-
   _setEventListeners = () => {
-    this._formElement.addEventListener('submit', (evt) => {
+    this._formElement.addEventListener("submit", (evt) => {
       evt.preventDefault();
     });
     this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
-      inputElement.addEventListener('input', () => {
+      inputElement.addEventListener("input", () => {
         this._checkInputValidity(inputElement);
         this.toggleButtonState();
       });
     });
   };
-
 
   enableValidation = () => {
     this._setEventListeners();
@@ -99,7 +92,6 @@ class FormValidator {
     });
     this.toggleButtonState();
   };
+}
 
-};
-
-export {FormValidator};
+export { FormValidator };

@@ -23,7 +23,6 @@ class Card {
     this._cardLike = this._element.querySelector(".element__vector");
     this._cardTrash = this._element.querySelector(".element__trash");
 
-    
     this._element.querySelector(".element__title").textContent = this._name;
     this._photoCard.src = this._link;
     this._photoCard.alt = this._name;
@@ -35,10 +34,9 @@ class Card {
 
   // слушатели
   _setEventListeners() {
-
-  this._photoCard.addEventListener('click', () => {
-    this._handleCardClick(this._link, this._name)
-  });
+    this._photoCard.addEventListener("click", () => {
+      this._handleCardClick(this._link, this._name);
+    });
 
     this._cardLike.addEventListener("click", () => {
       this._handleLikeCard();
@@ -48,7 +46,6 @@ class Card {
       this._handleDeleteCard();
     });
   }
-
 
   // метод для лайка
   _handleLikeCard() {
@@ -62,4 +59,4 @@ class Card {
   }
 }
 
-export { Card }
+export { Card };
