@@ -47,6 +47,7 @@ function handleProfileFormSubmit(evt) {
   profileStatus.textContent = jobInput.value;
   profileName.textContent = nameInput.value;
   popupEdit.close();
+
   resetValidation[formProfileEdit.name].toggleButtonState();
 }
 
@@ -55,16 +56,6 @@ function handleCardClick(link, name) {
   popupCardPhoto.open({ link: link, name: name });
 }
 
-// функция закрытия попапа с катинкой
-popupCloseCardPhotoButton.addEventListener("click", () =>
-  popupCardPhoto.close()
-);
-
-// функция открытия попапа добавления карточек
-popupOpenAddCard.addEventListener("click", () => popupCard.open());
-
-// функция закрытия попапа добавления карточек
-popupCloseAddCard.addEventListener("click", () => popupCard.close());
 
 // функция отправки формы для создания карточек
 const handleAddCardFormSubmit = (event) => {
@@ -76,9 +67,6 @@ const handleAddCardFormSubmit = (event) => {
   });
 
   section.addItem(newCard);
-
-  placeInput.value = "";
-  linkInput.value = "";
 
   popupCard.close();
   resetValidation[popupFormAdd.name].toggleButtonState();
@@ -135,9 +123,29 @@ const userInfo = new UserInfo(".profile__name", ".profile__status");
 
 // ОБРАБОТЧИКИ СОБЫТИЙ
 
-// кнопки открыть и закрыть для попапа редактирования
-buttonOpenPopupEdit.addEventListener("click", handleOpenPopupEdit);
-buttonOpenPopupEdit.addEventListener("click", () => popupEdit.open());
+
+// закрытие попапа с катинкой
+popupCloseCardPhotoButton.addEventListener("click", () =>
+  popupCardPhoto.close()
+);
+
+// открытие попапа добавления карточек
+popupOpenAddCard.addEventListener("click", () => {
+  resetValidation[popupFormAdd.name].resetError();
+  popupCard.open()
+});
+
+// закрытие попапа добавления карточек
+popupCloseAddCard.addEventListener("click", () => popupCard.close());
+
+
+// кнопка открытия и закрытия для попапа редактирования
+buttonOpenPopupEdit.addEventListener("click", () => {
+  handleOpenPopupEdit;
+  resetValidation[formProfileEdit.name].resetError();
+  popupEdit.open()
+});
+
 popupCloseEditButton.addEventListener("click", () => popupEdit.close());
 
 // слушатель кнопки "сохранить" в попапе редактирования имени
