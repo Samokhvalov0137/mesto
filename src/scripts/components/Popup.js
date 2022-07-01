@@ -7,6 +7,7 @@ class Popup {
     if (evt.key === "Escape") {
       this.close();
     }
+    debugger;
   }
 
   open() {

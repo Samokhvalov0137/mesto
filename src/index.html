@@ -15,7 +15,8 @@
 
       <main class="content">
         <section class="profile">
-          <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="аватар" />
+          <img class="profile__avatar" src="<%=require('./images/Avatar.jpg')%>" alt="аватар"/>
+          <button class="profile__button profile__button-avatar"></button>
           <div class="profile__info">
             <div class="profile__container">
               <h1 class="profile__name">Жак-Ив Кусто</h1>
@@ -140,6 +141,46 @@
         <div class="popup__card">
           <img class="popup__image" src="#" alt="#" />
           <p class="popup__name"></p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="popup popop_avatar" >
+      <div class="popup__content">
+        <button class="popup__close" id="popup-avatar__close" type="button"></button>
+        <div class="popup__input">
+          <h2 class="popup__title">Обновить аватар</h2>
+          <form novalidate class="form" name="form__avatar" id="form__avatar">
+            <fieldset class="form__set">
+              <label class="form__field">
+                <input
+                  class="form__input"
+                  id="input_avatar_link"
+                  type="url"
+                  name="form_avatar"
+                  placeholder="Ссылка"
+                  required
+                />
+                <span id="error-input_avatar_link" class="error"></span>
+              </label>
+              <button class="form__submit-btn" type="submit" id="form__avatar-btn">
+                Сохранить
+              </button>
+            </fieldset>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="popup popup_delete" >
+      <div class="popup__content">
+        <button class="popup__close" id="popup-delete__close" type="button"></button>
+        <div class="popup__input">
+          <h2 class="popup__title">Вы уверены?</h2>
+              <button class="form__submit-btn" type="submit" id="form__delete-btn">
+                Да
+              </button>
         </div>
       </div>
     </div>

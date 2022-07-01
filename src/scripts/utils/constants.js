@@ -36,11 +36,21 @@ const validationConfig = {
 };
 
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
+
 const popupCloseEditButton = document.querySelector(".popup__close");
 const profileName = document.querySelector(".profile__name");
 const profileStatus = document.querySelector(".profile__status");
 const nameInput = document.querySelector('input[name="form_name"]');
 const jobInput = document.querySelector('input[name="form_status"]');
+
+//попап редактирования аватара
+const buttonOpenAvatar = document.querySelector('.profile__button-avatar');
+const popupCloseAvatar = document.querySelector('#popup-avatar__close')
+const profileAvatarPhoto = document.querySelector('.profile__avatar');
+const popupAvatarEdit = ".popop_avatar";
+const formAvatar = document.querySelector('input[name="form_avatar"]');
+const formAvatarEdit = document.querySelector('#form__avatar');
+
 // переменные попапа добавления карточки
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
@@ -85,4 +95,10 @@ export {
   popupAddSelector,
   popupFormAdd,
   resetValidation,
+  buttonOpenAvatar,
+  popupCloseAvatar,
+  profileAvatarPhoto,
+  popupAvatarEdit,
+  formAvatar,
+  formAvatarEdit
 };

@@ -21,6 +21,12 @@ import {
   popupAddSelector,
   popupFormAdd,
   resetValidation,
+  buttonOpenAvatar,
+  popupCloseAvatar,
+  profileAvatarPhoto,
+  popupAvatarEdit,
+  formAvatar,
+  formAvatarEdit
 } from "../scripts/utils/constants.js";
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
@@ -49,6 +55,14 @@ function handleProfileFormSubmit(evt) {
   popupEdit.close();
 
   resetValidation[formProfileEdit.name].toggleButtonState();
+}
+
+function handleAvatarFormSubmit(evt) {
+  evt.preventDefault();
+
+  profileAvatarPhoto.src = formAvatar.value;
+  popupAvatar.close();
+  resetValidation[formAvatarEdit.name].toggleButtonState();
 }
 
 // //функция открытия попапа с картинкой
@@ -121,6 +135,10 @@ popupCard.setEventListeners();
 
 const userInfo = new UserInfo(".profile__name", ".profile__status");
 
+const popupAvatar = new PopupWithForm(popupAvatarEdit, handleAvatarFormSubmit);
+popupAvatar.setEventListeners();
+
+
 // ОБРАБОТЧИКИ СОБЫТИЙ
 
 
@@ -148,7 +166,18 @@ buttonOpenPopupEdit.addEventListener("click", () => {
 
 popupCloseEditButton.addEventListener("click", () => popupEdit.close());
 
+// попап редактирования аватара
+buttonOpenAvatar.addEventListener("click", () => {
+  resetValidation[formAvatarEdit.name].resetError();
+  popupAvatar.open()
+});
+
+popupCloseAvatar.addEventListener("click", () => popupAvatar.close());
+
+
 // слушатель кнопки "сохранить" в попапе редактирования имени
 formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
+
+formAvatarEdit.addEventListener("submit", handleAvatarFormSubmit);

@@ -52,7 +52,7 @@ class Card {
     this._cardLike.classList.toggle("element__vector_active");
   }
 
-  // метод удаления карточки
+  //метод удаления карточки
   _handleDeleteCard() {
     this._element.remove();
     this._element = null;
