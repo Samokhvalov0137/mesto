@@ -2,6 +2,9 @@ class Card {
   constructor(data, cardSelector, handleCardClick) {
     this._name = data.name;
     this._link = data.link;
+    this._id = data.id;
+    this._likesCounter = data.likes.length;
+    this._like = false;
     this._cardSelector = cardSelector;
     this._handleCardClick = handleCardClick;
   }
@@ -22,10 +25,13 @@ class Card {
     this._photoCard = this._element.querySelector(".element__photo");
     this._cardLike = this._element.querySelector(".element__vector");
     this._cardTrash = this._element.querySelector(".element__trash");
+    this._cardLikesCounter = this._element.querySelector(".element__vector-counter");
+    this._element.id = this._id;
 
     this._element.querySelector(".element__title").textContent = this._name;
     this._photoCard.src = this._link;
     this._photoCard.alt = this._name;
+    this._cardLikesCounter.textContent = this._likesCounter;
 
     this._setEventListeners();
 
@@ -50,6 +56,7 @@ class Card {
   // метод для лайка
   _handleLikeCard() {
     this._cardLike.classList.toggle("element__vector_active");
+    this._like = !this._like;
   }
 
   //метод удаления карточки

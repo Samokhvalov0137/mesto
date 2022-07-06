@@ -1,30 +1,38 @@
 // массив карточек с фото и названиями
-const initialCards = [
-  {
-    name: "Архыз",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-  },
-  {
-    name: "Челябинская область",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-  },
-  {
-    name: "Иваново",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-  },
-  {
-    name: "Камчатка",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-  },
-  {
-    name: "Холмогорский район",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-  },
-  {
-    name: "Байкал",
-    link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-  },
-];
+const fetchSetupData = {
+  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44',
+  headers: {
+    authorization: '9d5eb0d3-fb55-4a88-9fe1-f4f0f3428bab',
+    'Content-Type': 'application/json'
+  }
+}
+
+// let initialCards = [
+//   {
+//     name: "Архыз",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
+//   },
+//   {
+//     name: "Челябинская область",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
+//   },
+//   {
+//     name: "Иваново",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
+//   },
+//   {
+//     name: "Камчатка",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
+//   },
+//   {
+//     name: "Холмогорский район",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
+//   },
+//   {
+//     name: "Байкал",
+//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
+//   },
+// ];
 
 const validationConfig = {
   formSelector: ".form",
@@ -55,6 +63,9 @@ const formAvatarEdit = document.querySelector('#form__avatar');
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
 const elementsCard = ".elements";
+
+// попап удаление карточек
+const popupDeleteCard = ".popup_delete";
 // шаблоны
 
 // ДОМ элементы
@@ -75,7 +86,6 @@ const popupFormAdd = document.querySelector("#form__add");
 const resetValidation = {};
 
 export {
-  initialCards,
   validationConfig,
   buttonOpenPopupEdit,
   popupCloseEditButton,
@@ -100,5 +110,7 @@ export {
   profileAvatarPhoto,
   popupAvatarEdit,
   formAvatar,
-  formAvatarEdit
+  formAvatarEdit,
+  fetchSetupData,
+  popupDeleteCard
 };

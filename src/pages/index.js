@@ -1,7 +1,6 @@
 import './index.css'; // добавьте импорт главного файла стилей
 
 import {
-  initialCards,
   validationConfig,
   buttonOpenPopupEdit,
   popupCloseEditButton,
@@ -26,8 +25,10 @@ import {
   profileAvatarPhoto,
   popupAvatarEdit,
   formAvatar,
-  formAvatarEdit
+  formAvatarEdit,
+  fetchSetupData
 } from "../scripts/utils/constants.js";
+import { Api } from '../scripts/components/Api';
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
@@ -47,15 +48,22 @@ function handleOpenPopupEdit() {
 }
 
 // функция отправки и кнопки "сохранить" в попапе редактирования имени
-function handleProfileFormSubmit(evt) {
-  evt.preventDefault();
-
-  profileStatus.textContent = jobInput.value;
-  profileName.textContent = nameInput.value;
+function handleProfileFormSubmit() {
+  api
+  .patchUserInfo({ 
+    name: nameInput.value,
+    about: jobInput.value
+  })
+  .then((userData) => {
+    userInfo.setUserData(userData);
+  })
+  .catch((err) => {
+    alert(err);
+  });
   popupEdit.close();
-
   resetValidation[formProfileEdit.name].toggleButtonState();
 }
+
 
 function handleAvatarFormSubmit(evt) {
   evt.preventDefault();
@@ -73,18 +81,24 @@ function handleCardClick(link, name) {
 
 // функция отправки формы для создания карточек
 const handleAddCardFormSubmit = (event) => {
-  event.preventDefault();
-
-  const newCard = createCard({
-    name: placeInput.value,
-    link: linkInput.value,
-  });
-
-  section.addItem(newCard);
-
-  popupCard.close();
-  resetValidation[popupFormAdd.name].toggleButtonState();
+  api
+  .postCardData({
+      name: placeInput.value,
+      link: linkInput.value,
+    })
+    .then((cardData) => {
+      event.preventDefault();
+      const newCard = createCard(cardData);
+      section.addItem(newCard);
+      popupCard.close();
+    })
+    .catch((err) => {
+      alert(err);
+    });
 };
+
+
+const api = new Api(fetchSetupData);
 
 //генерация карточки
 // функция создания карточек и прохождение по массиву с данными
@@ -94,9 +108,9 @@ function createCard(initialData) {
   return card.generationCard();
 }
 
+
 const section = new Section(
   {
-    items: initialCards,
     renderer: (item) => {
       const newCard = createCard(item);
       section.addItem(newCard);
@@ -105,7 +119,18 @@ const section = new Section(
   elementsCard
 );
 
-section.renderItems();
+//section.renderItems();
+
+api
+  .getCardsArray()
+  .then((cardsArray) => {
+    section.renderItems(cardsArray);
+  })
+  .catch((err) => {
+    alert(err);
+  });
+
+
 
 // функция валидации
 function enableValidation(object) {
@@ -122,18 +147,23 @@ enableValidation(validationConfig);
 const popupCardPhoto = new PopupWithImage(popupImageSelector);
 popupCardPhoto.setEventListeners();
 
-const popupEdit = new PopupWithForm(popupEditSelector, {
-  handleProfileFormSubmit: (data) => {
-    userInfo.setUserInfo(data);
-    popupEdit.close();
-  },
-});
+const popupEdit = new PopupWithForm(popupEditSelector, handleProfileFormSubmit);
 popupEdit.setEventListeners();
 
 const popupCard = new PopupWithForm(popupAddSelector, handleAddCardFormSubmit);
 popupCard.setEventListeners();
 
-const userInfo = new UserInfo(".profile__name", ".profile__status");
+const userInfo = new UserInfo(".profile__name", ".profile__status", ".profile__avatar");
+
+api
+  .getUserInfo()
+  .then((userData) => {
+    userInfo.setUserData(userData);
+  })
+  .catch((err) => {
+    alert(err);
+  });
+
 
 const popupAvatar = new PopupWithForm(popupAvatarEdit, handleAvatarFormSubmit);
 popupAvatar.setEventListeners();
