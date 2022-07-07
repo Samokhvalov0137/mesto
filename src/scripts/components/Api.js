@@ -39,6 +39,10 @@ export class Api {
     return this._baseGetMethod("/cards");
   }
 
+  patchUserAvatar(userData) {
+    return this._basePatchOrPostMethod("/users/me/avatar", 'PATCH', userData);
+  }
+  
   patchUserInfo(userData) {
     return this._basePatchOrPostMethod("/users/me", 'PATCH', userData);
   }
@@ -47,7 +51,15 @@ export class Api {
     return this._basePatchOrPostMethod('/cards','POST',cardData);
   }
 
-  // deleteCard(cardId) {
-  //   return this._basePatchOrPostMethod(`/cards/${cardId}`, "DELETE", {});
-  // }
+  deleteCard(cardId) {
+    return this._basePatchOrPostMethod(`/cards/${cardId}`, "DELETE", {});
+  }
+
+  setLike(cardId) {
+    return this._basePatchOrPostMethod(`/cards/${cardId}/likes`, "PUT", {});
+  }
+
+  deleteLike(cardId) {
+    return this._basePatchOrPostMethod(`/cards/${cardId}/likes`, "DELETE", {});
+  }
 }

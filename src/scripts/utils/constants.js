@@ -7,33 +7,6 @@ const fetchSetupData = {
   }
 }
 
-// let initialCards = [
-//   {
-//     name: "Архыз",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/arkhyz.jpg",
-//   },
-//   {
-//     name: "Челябинская область",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/chelyabinsk-oblast.jpg",
-//   },
-//   {
-//     name: "Иваново",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/ivanovo.jpg",
-//   },
-//   {
-//     name: "Камчатка",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kamchatka.jpg",
-//   },
-//   {
-//     name: "Холмогорский район",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/kholmogorsky-rayon.jpg",
-//   },
-//   {
-//     name: "Байкал",
-//     link: "https://pictures.s3.yandex.net/frontend-developer/cards-compressed/baikal.jpg",
-//   },
-// ];
-
 const validationConfig = {
   formSelector: ".form",
   inputSelector: ".form__input",
@@ -46,15 +19,12 @@ const validationConfig = {
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
 
 const popupCloseEditButton = document.querySelector(".popup__close");
-const profileName = document.querySelector(".profile__name");
-const profileStatus = document.querySelector(".profile__status");
 const nameInput = document.querySelector('input[name="form_name"]');
 const jobInput = document.querySelector('input[name="form_status"]');
 
 //попап редактирования аватара
 const buttonOpenAvatar = document.querySelector('.profile__button-avatar');
 const popupCloseAvatar = document.querySelector('#popup-avatar__close')
-const profileAvatarPhoto = document.querySelector('.profile__avatar');
 const popupAvatarEdit = ".popop_avatar";
 const formAvatar = document.querySelector('input[name="form_avatar"]');
 const formAvatarEdit = document.querySelector('#form__avatar');
@@ -89,8 +59,6 @@ export {
   validationConfig,
   buttonOpenPopupEdit,
   popupCloseEditButton,
-  profileName,
-  profileStatus,
   nameInput,
   jobInput,
   popupCloseAddCard,
@@ -107,7 +75,6 @@ export {
   resetValidation,
   buttonOpenAvatar,
   popupCloseAvatar,
-  profileAvatarPhoto,
   popupAvatarEdit,
   formAvatar,
   formAvatarEdit,

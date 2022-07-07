@@ -4,8 +4,6 @@ import {
   validationConfig,
   buttonOpenPopupEdit,
   popupCloseEditButton,
-  profileName,
-  profileStatus,
   nameInput,
   jobInput,
   popupCloseAddCard,
@@ -22,10 +20,10 @@ import {
   resetValidation,
   buttonOpenAvatar,
   popupCloseAvatar,
-  profileAvatarPhoto,
   popupAvatarEdit,
   formAvatar,
   formAvatarEdit,
+  popupDeleteCard,
   fetchSetupData
 } from "../scripts/utils/constants.js";
 import { Api } from '../scripts/components/Api';
@@ -56,28 +54,49 @@ function handleProfileFormSubmit() {
   })
   .then((userData) => {
     userInfo.setUserData(userData);
+    popupEdit.close();
   })
   .catch((err) => {
     alert(err);
   });
-  popupEdit.close();
   resetValidation[formProfileEdit.name].toggleButtonState();
 }
 
 
-function handleAvatarFormSubmit(evt) {
-  evt.preventDefault();
-
-  profileAvatarPhoto.src = formAvatar.value;
-  popupAvatar.close();
-  resetValidation[formAvatarEdit.name].toggleButtonState();
+function handleEditAvatarPopupForm() {
+  api
+  .patchUserAvatar({ avatar: formAvatar.value })
+    .then((userData) => {
+      userInfo.setUserData(userData);
+      popupAvatar.close();
+    })
+    .catch((err) => {
+      alert(err);
+    });
+    resetValidation[formAvatarEdit.name].toggleButtonState();
 }
+
 
 // //функция открытия попапа с картинкой
 function handleCardClick(link, name) {
   popupCardPhoto.open({ link: link, name: name });
 }
 
+const api = new Api(fetchSetupData);
+
+//генерация карточки
+// функция создания карточек и прохождение по массиву с данными
+
+function createCard(initialData) {
+  const card = new Card(initialData, 
+    "#elements__template", 
+    handleCardClick, 
+    userInfo.getUserId(), 
+    handleDeleteCardButton, 
+    handleLikeButton
+    );
+  return card.generationCard();
+}
 
 // функция отправки формы для создания карточек
 const handleAddCardFormSubmit = (event) => {
@@ -98,15 +117,56 @@ const handleAddCardFormSubmit = (event) => {
 };
 
 
-const api = new Api(fetchSetupData);
 
-//генерация карточки
-// функция создания карточек и прохождение по массиву с данными
-
-function createCard(initialData) {
-  const card = new Card(initialData, "#elements__template", handleCardClick);
-  return card.generationCard();
+function handleDeleteCardButton(cardObject){
+  areYouSurePopup.cardForDelete = cardObject;
+  areYouSurePopup.open();
 }
+
+// function handleAreYouSurePopupForm(){
+//   api
+//   .deleteCard(areYouSurePopup.cardForDelete._id)
+//     .then(() => {
+//       //areYouSurePopup.close();
+//       areYouSurePopup.cardForDelete.deleteElementCard();
+//       //areYouSurePopup.cardForDelete = {};
+//     })
+//     .catch((err) => {
+//       alert(err);
+//     })
+//     .finally(() => {
+//       areYouSurePopup.close();
+//       areYouSurePopup.cardForDelete = {};
+//       //alert(err);
+//     });
+// }
+
+function handleLikeButton(cardObject) {
+  if (cardObject._like) {
+    api
+      .deleteLike(cardObject._id)
+      .then((cardData) => {
+        cardObject.updateLikeState(cardData.likes);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  } else {
+    api
+      .setLike(cardObject._id)
+      .then((cardData) => {
+        cardObject.updateLikeState(cardData.likes);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+}
+
+
+
+// const areYouSurePopup = new PopupWithForm(popupDeleteCard, handleAreYouSurePopupForm);
+// areYouSurePopup.setEventListeners();
 
 
 const section = new Section(
@@ -165,7 +225,7 @@ api
   });
 
 
-const popupAvatar = new PopupWithForm(popupAvatarEdit, handleAvatarFormSubmit);
+const popupAvatar = new PopupWithForm(popupAvatarEdit, handleEditAvatarPopupForm);
 popupAvatar.setEventListeners();
 
 
@@ -210,4 +270,4 @@ formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
-formAvatarEdit.addEventListener("submit", handleAvatarFormSubmit);
+formAvatarEdit.addEventListener("submit", handleEditAvatarPopupForm);

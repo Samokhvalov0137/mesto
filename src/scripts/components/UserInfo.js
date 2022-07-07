@@ -9,7 +9,8 @@ export class UserInfo {
 getUserInfo = () => {
   const name = this._userName.textContent;
   const status = this._userJob.textContent;
-  return {name, status}
+  const avatarUrl = this._userAvatar.src;
+  return {name, status, avatarUrl}
 }
 
 
@@ -20,9 +21,8 @@ setUserData(userData){
   this._id = userData._id;
 }
 
-setUserInfo (data) {
-  this._userName.textContent = data.userName.value;
-  this._userJob.textContent = data.userJob.value;
+getUserId(){
+  return this._id;
 }
 
 }
