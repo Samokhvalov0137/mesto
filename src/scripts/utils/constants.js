@@ -28,14 +28,15 @@ const popupCloseAvatar = document.querySelector('#popup-avatar__close')
 const popupAvatarEdit = ".popop_avatar";
 const formAvatar = document.querySelector('input[name="form_avatar"]');
 const formAvatarEdit = document.querySelector('#form__avatar');
-
+const popupDeleteSelector = ".popup_delete";
+const popupDeleteClose = document.querySelector('#popup-delete__close')
 // переменные попапа добавления карточки
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
 const elementsCard = ".elements";
 
 // попап удаление карточек
-const popupDeleteCard = ".popup_delete";
+
 // шаблоны
 
 // ДОМ элементы
@@ -52,6 +53,8 @@ const formProfileEdit = document.querySelector("#form-edit");
 
 const popupAddSelector = "#popup-add";
 const popupFormAdd = document.querySelector("#form__add");
+
+
 
 const resetValidation = {};
 
@@ -79,5 +82,6 @@ export {
   formAvatar,
   formAvatarEdit,
   fetchSetupData,
-  popupDeleteCard
+  popupDeleteSelector,
+  popupDeleteClose,
 };

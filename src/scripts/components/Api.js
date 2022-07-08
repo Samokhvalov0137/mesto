@@ -5,7 +5,7 @@ export class Api {
     this._headers = options.headers;
   }
 
-  _baseGetMethod(addString) {
+  _getMethod(addString) {
     return fetch(`${this._baseUrl}${addString}`, {
       headers: {
         authorization: this._token,
@@ -18,7 +18,7 @@ export class Api {
     });
   }
 
-  _basePatchOrPostMethod(addString, method, jsonObject) {
+  _PatchPostMethod(addString, method, jsonObject) {
     return fetch(`${this._baseUrl}${addString}`, {
       method: method,
       headers: this._headers,
@@ -32,34 +32,34 @@ export class Api {
   }
 
   getUserInfo() {
-    return this._baseGetMethod("/users/me");
+    return this._getMethod("/users/me");
   }
 
   getCardsArray() {
-    return this._baseGetMethod("/cards");
+    return this._getMethod("/cards");
   }
 
   patchUserAvatar(userData) {
-    return this._basePatchOrPostMethod("/users/me/avatar", 'PATCH', userData);
+    return this._PatchPostMethod("/users/me/avatar", 'PATCH', userData);
   }
   
   patchUserInfo(userData) {
-    return this._basePatchOrPostMethod("/users/me", 'PATCH', userData);
+    return this._PatchPostMethod("/users/me", 'PATCH', userData);
   }
 
   postCardData(cardData){
-    return this._basePatchOrPostMethod('/cards','POST',cardData);
+    return this._PatchPostMethod('/cards','POST',cardData);
   }
 
   deleteCard(cardId) {
-    return this._basePatchOrPostMethod(`/cards/${cardId}`, "DELETE", {});
+    return this._PatchPostMethod(`/cards/${cardId}`, 'DELETE', {});
   }
 
   setLike(cardId) {
-    return this._basePatchOrPostMethod(`/cards/${cardId}/likes`, "PUT", {});
+    return this._PatchPostMethod(`/cards/${cardId}/likes`, 'PUT', {});
   }
 
   deleteLike(cardId) {
-    return this._basePatchOrPostMethod(`/cards/${cardId}/likes`, "DELETE", {});
+    return this._PatchPostMethod(`/cards/${cardId}/likes`, 'DELETE', {});
   }
 }

@@ -23,13 +23,15 @@ import {
   popupAvatarEdit,
   formAvatar,
   formAvatarEdit,
-  popupDeleteCard,
-  fetchSetupData
+  fetchSetupData,
+  popupDeleteSelector,
+  popupDeleteClose,
 } from "../scripts/utils/constants.js";
 import { Api } from '../scripts/components/Api';
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
+import { PopupWithConfirmation } from "../scripts/components/PopupWithConfirmation.js";
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
@@ -63,7 +65,7 @@ function handleProfileFormSubmit() {
 }
 
 
-function handleEditAvatarPopupForm() {
+function handleEditAvatar() {
   api
   .patchUserAvatar({ avatar: formAvatar.value })
     .then((userData) => {
@@ -99,14 +101,14 @@ function createCard(initialData) {
 }
 
 // функция отправки формы для создания карточек
-const handleAddCardFormSubmit = (event) => {
+function handleAddCardFormSubmit () {
   api
   .postCardData({
       name: placeInput.value,
       link: linkInput.value,
     })
     .then((cardData) => {
-      event.preventDefault();
+      //event.preventDefault();
       const newCard = createCard(cardData);
       section.addItem(newCard);
       popupCard.close();
@@ -118,28 +120,27 @@ const handleAddCardFormSubmit = (event) => {
 
 
 
-function handleDeleteCardButton(cardObject){
-  areYouSurePopup.cardForDelete = cardObject;
-  areYouSurePopup.open();
+
+
+function handleConfirmationSubmit(){
+  api
+  .deleteCard(popupDeleteCard.cardForDelete._id)
+    .then(() => {
+      popupDeleteCard.cardForDelete.deleteElementCard();
+      popupDeleteCard.close();
+      popupDeleteCard.cardForDelete = {};
+    })
+    .catch((err) => {
+      alert(err);
+    })
 }
 
-// function handleAreYouSurePopupForm(){
-//   api
-//   .deleteCard(areYouSurePopup.cardForDelete._id)
-//     .then(() => {
-//       //areYouSurePopup.close();
-//       areYouSurePopup.cardForDelete.deleteElementCard();
-//       //areYouSurePopup.cardForDelete = {};
-//     })
-//     .catch((err) => {
-//       alert(err);
-//     })
-//     .finally(() => {
-//       areYouSurePopup.close();
-//       areYouSurePopup.cardForDelete = {};
-//       //alert(err);
-//     });
-// }
+
+function handleDeleteCardButton(cardObject){
+  popupDeleteCard.cardForDelete = cardObject;
+  popupDeleteCard.open();
+}
+
 
 function handleLikeButton(cardObject) {
   if (cardObject._like) {
@@ -164,11 +165,6 @@ function handleLikeButton(cardObject) {
 }
 
 
-
-// const areYouSurePopup = new PopupWithForm(popupDeleteCard, handleAreYouSurePopupForm);
-// areYouSurePopup.setEventListeners();
-
-
 const section = new Section(
   {
     renderer: (item) => {
@@ -179,7 +175,6 @@ const section = new Section(
   elementsCard
 );
 
-//section.renderItems();
 
 api
   .getCardsArray()
@@ -213,6 +208,8 @@ popupEdit.setEventListeners();
 const popupCard = new PopupWithForm(popupAddSelector, handleAddCardFormSubmit);
 popupCard.setEventListeners();
 
+
+
 const userInfo = new UserInfo(".profile__name", ".profile__status", ".profile__avatar");
 
 api
@@ -225,12 +222,14 @@ api
   });
 
 
-const popupAvatar = new PopupWithForm(popupAvatarEdit, handleEditAvatarPopupForm);
+const popupAvatar = new PopupWithForm(popupAvatarEdit, handleEditAvatar);
 popupAvatar.setEventListeners();
 
-
+const popupDeleteCard = new PopupWithConfirmation(popupDeleteSelector, handleConfirmationSubmit);
+popupDeleteCard.setEventListeners();
 // ОБРАБОТЧИКИ СОБЫТИЙ
 
+popupDeleteClose.addEventListener("click", () => popupDeleteCard.close());
 
 // закрытие попапа с катинкой
 popupCloseCardPhotoButton.addEventListener("click", () =>
@@ -270,4 +269,4 @@ formProfileEdit.addEventListener("submit", handleProfileFormSubmit);
 
 popupFormAdd.addEventListener("submit", handleAddCardFormSubmit);
 
-formAvatarEdit.addEventListener("submit", handleEditAvatarPopupForm);
+formAvatarEdit.addEventListener("submit", handleEditAvatar);
