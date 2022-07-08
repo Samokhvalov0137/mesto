@@ -25,7 +25,7 @@ const jobInput = document.querySelector('input[name="form_status"]');
 //попап редактирования аватара
 const buttonOpenAvatar = document.querySelector(".profile__button-avatar");
 const popupCloseAvatar = document.querySelector("#popup-avatar__close");
-const popupAvatarEdit = ".popop_avatar";
+const popupAvatarEdit = ".popup_avatar";
 const formAvatar = document.querySelector('input[name="form_avatar"]');
 const formAvatarEdit = document.querySelector("#form__avatar");
 const popupDeleteSelector = ".popup_delete";
