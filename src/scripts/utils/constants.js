@@ -1,11 +1,11 @@
 // массив карточек с фото и названиями
 const fetchSetupData = {
-  baseUrl: 'https://mesto.nomoreparties.co/v1/cohort-44',
+  baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
   headers: {
-    authorization: '9d5eb0d3-fb55-4a88-9fe1-f4f0f3428bab',
-    'Content-Type': 'application/json'
-  }
-}
+    authorization: "9d5eb0d3-fb55-4a88-9fe1-f4f0f3428bab",
+    "Content-Type": "application/json",
+  },
+};
 
 const validationConfig = {
   formSelector: ".form",
@@ -23,13 +23,13 @@ const nameInput = document.querySelector('input[name="form_name"]');
 const jobInput = document.querySelector('input[name="form_status"]');
 
 //попап редактирования аватара
-const buttonOpenAvatar = document.querySelector('.profile__button-avatar');
-const popupCloseAvatar = document.querySelector('#popup-avatar__close')
+const buttonOpenAvatar = document.querySelector(".profile__button-avatar");
+const popupCloseAvatar = document.querySelector("#popup-avatar__close");
 const popupAvatarEdit = ".popop_avatar";
 const formAvatar = document.querySelector('input[name="form_avatar"]');
-const formAvatarEdit = document.querySelector('#form__avatar');
+const formAvatarEdit = document.querySelector("#form__avatar");
 const popupDeleteSelector = ".popup_delete";
-const popupDeleteClose = document.querySelector('#popup-delete__close')
+const popupDeleteClose = document.querySelector("#popup-delete__close");
 // переменные попапа добавления карточки
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
@@ -53,8 +53,6 @@ const formProfileEdit = document.querySelector("#form-edit");
 
 const popupAddSelector = "#popup-add";
 const popupFormAdd = document.querySelector("#form__add");
-
-
 
 const resetValidation = {};
 

@@ -9,7 +9,7 @@ export class PopupWithConfirmation extends Popup {
   setEventListeners() {
     super.setEventListeners();
     this._submitButton.addEventListener("click", () => {
-        this._submitButton.textContent = 'Удаляю...'  
+      this._submitButton.textContent = "Удаляю...";
       this._handleSubmit();
     });
   }

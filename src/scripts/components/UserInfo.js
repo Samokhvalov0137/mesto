@@ -5,24 +5,21 @@ export class UserInfo {
     this._userAvatar = document.querySelector(userAvatar);
   }
 
+  getUserInfo = () => {
+    const name = this._userName.textContent;
+    const status = this._userJob.textContent;
+    const avatarUrl = this._userAvatar.src;
+    return { name, status, avatarUrl };
+  };
 
-getUserInfo = () => {
-  const name = this._userName.textContent;
-  const status = this._userJob.textContent;
-  const avatarUrl = this._userAvatar.src;
-  return {name, status, avatarUrl}
-}
+  setUserData(userData) {
+    this._userAvatar.src = userData.avatar;
+    this._userName.textContent = userData.name;
+    this._userJob.textContent = userData.about;
+    this._id = userData._id;
+  }
 
-
-setUserData(userData){
-  this._userAvatar.src = userData.avatar;
-  this._userName.textContent = userData.name;
-  this._userJob.textContent = userData.about;
-  this._id = userData._id;
-}
-
-getUserId(){
-  return this._id;
-}
-
+  getUserId() {
+    return this._id;
+  }
 }

@@ -1,5 +1,12 @@
 class Card {
-  constructor(data, cardSelector, handleCardClick, curentUserId, handleDeleteCardButton, handleLikeButton) {
+  constructor(
+    data,
+    cardSelector,
+    handleCardClick,
+    curentUserId,
+    handleDeleteCardButton,
+    handleLikeButton
+  ) {
     this._name = data.name;
     this._link = data.link;
     this._id = data._id;
@@ -14,7 +21,6 @@ class Card {
     this._handleLikeButton = handleLikeButton;
   }
 
-
   _getTemplate() {
     const cardElement = document
       .querySelector(this._cardSelector)
@@ -24,7 +30,6 @@ class Card {
     return cardElement;
   }
 
-  
   //генерация карточки
   generationCard() {
     this._element = this._getTemplate();
@@ -32,13 +37,15 @@ class Card {
     this._photoCard = this._element.querySelector(".element__photo");
     this._cardLike = this._element.querySelector(".element__vector");
     this._cardTrash = this._element.querySelector(".element__trash");
-    this._cardLikesCounter = this._element.querySelector(".element__vector-counter");
+    this._cardLikesCounter = this._element.querySelector(
+      ".element__vector-counter"
+    );
 
     this.updateLikeState(this._likesArray);
 
     if (!this._isCurentUserCard) {
       this._cardTrash.remove();
-    };
+    }
 
     this._element.id = this._id;
 
@@ -50,8 +57,6 @@ class Card {
 
     return this._element;
   }
-
-
 
   // слушатели
   _setEventListeners() {
@@ -70,7 +75,6 @@ class Card {
     }
   }
 
-
   updateLikeState(likesArray) {
     this._likesArray = likesArray;
     this._likesCounter = likesArray.length;
@@ -83,22 +87,17 @@ class Card {
     }
   }
 
-
-     //метод удаления карточки
-     deleteElementCard() {
-      this._element.remove();
-      this._element = null;
-    }
-
-
+  //метод удаления карточки
+  deleteElementCard() {
+    this._element.remove();
+    this._element = null;
+  }
 
   // метод для лайка
   _toggleLikeCard() {
     this._cardLike.classList.toggle("element__vector_active");
     this._like = !this._like;
   }
-
-
 }
 
 export { Card };

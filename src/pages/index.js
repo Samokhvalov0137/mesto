@@ -1,4 +1,4 @@
-import './index.css'; // добавьте импорт главного файла стилей
+import "./index.css"; // добавьте импорт главного файла стилей
 
 import {
   validationConfig,
@@ -27,7 +27,7 @@ import {
   popupDeleteSelector,
   popupDeleteClose,
 } from "../scripts/utils/constants.js";
-import { Api } from '../scripts/components/Api';
+import { Api } from "../scripts/components/Api";
 import { Card } from "../scripts/components/Card.js";
 import { FormValidator } from "../scripts/components/FormValidator.js";
 import { Section } from "../scripts/components/Section.js";
@@ -35,7 +35,6 @@ import { PopupWithConfirmation } from "../scripts/components/PopupWithConfirmati
 import { PopupWithImage } from "../scripts/components/PopupWithImage.js";
 import { PopupWithForm } from "../scripts/components/PopupWithForm.js";
 import { UserInfo } from "../scripts/components/UserInfo.js";
-
 
 // ФУНКЦИИ
 
@@ -50,24 +49,23 @@ function handleOpenPopupEdit() {
 // функция отправки и кнопки "сохранить" в попапе редактирования имени
 function handleProfileFormSubmit() {
   api
-  .patchUserInfo({ 
-    name: nameInput.value,
-    about: jobInput.value
-  })
-  .then((userData) => {
-    userInfo.setUserData(userData);
-    popupEdit.close();
-  })
-  .catch((err) => {
-    alert(err);
-  });
+    .patchUserInfo({
+      name: nameInput.value,
+      about: jobInput.value,
+    })
+    .then((userData) => {
+      userInfo.setUserData(userData);
+      popupEdit.close();
+    })
+    .catch((err) => {
+      alert(err);
+    });
   resetValidation[formProfileEdit.name].toggleButtonState();
 }
 
-
 function handleEditAvatar() {
   api
-  .patchUserAvatar({ avatar: formAvatar.value })
+    .patchUserAvatar({ avatar: formAvatar.value })
     .then((userData) => {
       userInfo.setUserData(userData);
       popupAvatar.close();
@@ -75,9 +73,8 @@ function handleEditAvatar() {
     .catch((err) => {
       alert(err);
     });
-    resetValidation[formAvatarEdit.name].toggleButtonState();
+  resetValidation[formAvatarEdit.name].toggleButtonState();
 }
-
 
 // //функция открытия попапа с картинкой
 function handleCardClick(link, name) {
@@ -90,20 +87,21 @@ const api = new Api(fetchSetupData);
 // функция создания карточек и прохождение по массиву с данными
 
 function createCard(initialData) {
-  const card = new Card(initialData, 
-    "#elements__template", 
-    handleCardClick, 
-    userInfo.getUserId(), 
-    handleDeleteCardButton, 
+  const card = new Card(
+    initialData,
+    "#elements__template",
+    handleCardClick,
+    userInfo.getUserId(),
+    handleDeleteCardButton,
     handleLikeButton
-    );
+  );
   return card.generationCard();
 }
 
 // функция отправки формы для создания карточек
-function handleAddCardFormSubmit () {
+function handleAddCardFormSubmit() {
   api
-  .postCardData({
+    .postCardData({
       name: placeInput.value,
       link: linkInput.value,
     })
@@ -116,15 +114,11 @@ function handleAddCardFormSubmit () {
     .catch((err) => {
       alert(err);
     });
-};
+}
 
-
-
-
-
-function handleConfirmationSubmit(){
+function handleConfirmationSubmit() {
   api
-  .deleteCard(popupDeleteCard.cardForDelete._id)
+    .deleteCard(popupDeleteCard.cardForDelete._id)
     .then(() => {
       popupDeleteCard.cardForDelete.deleteElementCard();
       popupDeleteCard.close();
@@ -132,15 +126,13 @@ function handleConfirmationSubmit(){
     })
     .catch((err) => {
       alert(err);
-    })
+    });
 }
 
-
-function handleDeleteCardButton(cardObject){
+function handleDeleteCardButton(cardObject) {
   popupDeleteCard.cardForDelete = cardObject;
   popupDeleteCard.open();
 }
-
 
 function handleLikeButton(cardObject) {
   if (cardObject._like) {
@@ -164,7 +156,6 @@ function handleLikeButton(cardObject) {
   }
 }
 
-
 const section = new Section(
   {
     renderer: (item) => {
@@ -175,7 +166,6 @@ const section = new Section(
   elementsCard
 );
 
-
 api
   .getCardsArray()
   .then((cardsArray) => {
@@ -184,8 +174,6 @@ api
   .catch((err) => {
     alert(err);
   });
-
-
 
 // функция валидации
 function enableValidation(object) {
@@ -208,9 +196,11 @@ popupEdit.setEventListeners();
 const popupCard = new PopupWithForm(popupAddSelector, handleAddCardFormSubmit);
 popupCard.setEventListeners();
 
-
-
-const userInfo = new UserInfo(".profile__name", ".profile__status", ".profile__avatar");
+const userInfo = new UserInfo(
+  ".profile__name",
+  ".profile__status",
+  ".profile__avatar"
+);
 
 api
   .getUserInfo()
@@ -221,11 +211,13 @@ api
     alert(err);
   });
 
-
 const popupAvatar = new PopupWithForm(popupAvatarEdit, handleEditAvatar);
 popupAvatar.setEventListeners();
 
-const popupDeleteCard = new PopupWithConfirmation(popupDeleteSelector, handleConfirmationSubmit);
+const popupDeleteCard = new PopupWithConfirmation(
+  popupDeleteSelector,
+  handleConfirmationSubmit
+);
 popupDeleteCard.setEventListeners();
 // ОБРАБОТЧИКИ СОБЫТИЙ
 
@@ -239,18 +231,17 @@ popupCloseCardPhotoButton.addEventListener("click", () =>
 // открытие попапа добавления карточек
 popupOpenAddCard.addEventListener("click", () => {
   resetValidation[popupFormAdd.name].resetError();
-  popupCard.open()
+  popupCard.open();
 });
 
 // закрытие попапа добавления карточек
 popupCloseAddCard.addEventListener("click", () => popupCard.close());
 
-
 // кнопка открытия и закрытия для попапа редактирования
 buttonOpenPopupEdit.addEventListener("click", () => {
   handleOpenPopupEdit;
   resetValidation[formProfileEdit.name].resetError();
-  popupEdit.open()
+  popupEdit.open();
 });
 
 popupCloseEditButton.addEventListener("click", () => popupEdit.close());
@@ -258,11 +249,10 @@ popupCloseEditButton.addEventListener("click", () => popupEdit.close());
 // попап редактирования аватара
 buttonOpenAvatar.addEventListener("click", () => {
   resetValidation[formAvatarEdit.name].resetError();
-  popupAvatar.open()
+  popupAvatar.open();
 });
 
 popupCloseAvatar.addEventListener("click", () => popupAvatar.close());
-
 
 // слушатель кнопки "сохранить" в попапе редактирования имени
 formProfileEdit.addEventListener("submit", handleProfileFormSubmit);

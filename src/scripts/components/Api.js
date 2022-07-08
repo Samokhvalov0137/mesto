@@ -40,26 +40,26 @@ export class Api {
   }
 
   patchUserAvatar(userData) {
-    return this._PatchPostMethod("/users/me/avatar", 'PATCH', userData);
-  }
-  
-  patchUserInfo(userData) {
-    return this._PatchPostMethod("/users/me", 'PATCH', userData);
+    return this._PatchPostMethod("/users/me/avatar", "PATCH", userData);
   }
 
-  postCardData(cardData){
-    return this._PatchPostMethod('/cards','POST',cardData);
+  patchUserInfo(userData) {
+    return this._PatchPostMethod("/users/me", "PATCH", userData);
+  }
+
+  postCardData(cardData) {
+    return this._PatchPostMethod("/cards", "POST", cardData);
   }
 
   deleteCard(cardId) {
-    return this._PatchPostMethod(`/cards/${cardId}`, 'DELETE', {});
+    return this._PatchPostMethod(`/cards/${cardId}`, "DELETE", {});
   }
 
   setLike(cardId) {
-    return this._PatchPostMethod(`/cards/${cardId}/likes`, 'PUT', {});
+    return this._PatchPostMethod(`/cards/${cardId}/likes`, "PUT", {});
   }
 
   deleteLike(cardId) {
-    return this._PatchPostMethod(`/cards/${cardId}/likes`, 'DELETE', {});
+    return this._PatchPostMethod(`/cards/${cardId}/likes`, "DELETE", {});
   }
 }
