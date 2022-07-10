@@ -33,6 +33,7 @@
 .popup__input{display:flex;flex-direction:column}
 .popup__content{background:#fff;border-radius:10px;box-shadow:0 0 25px rgba(0,0,0,.15);box-sizing:border-box;max-width:430px;padding:34px 36px;position:relative;width:100%}@media screen and (max-width:940px){.popup__content{max-width:350px}}@media screen and (max-width:620px){.popup__content{max-width:282px;padding:25px 22px}}
 .popup__close{background:url(b2ce87edca05ba3f6a45.png);background-position:50%;background-repeat:no-repeat;background-size:contain;border-style:none;cursor:pointer;height:32px;position:absolute;right:-40px;top:-40px;width:32px}.popup__close:hover{opacity:.6;transition:.2s linear}@media screen and (max-width:620px){.popup__close{height:20px;right:0;top:-35px;width:20px}}
+.popup__submit-btn{background:#000;border:0;border-radius:2px;box-sizing:border-box;color:#fff;cursor:pointer;font-family:Inter,‘Arial’,sans-serif;font-size:18px;font-style:normal;font-weight:400;height:50px;line-height:22px;margin-top:18px;text-align:center;width:358px}@media screen and (max-width:940px){.popup__submit-btn{font-size:14px;height:46px;line-height:17px;margin:25px 0 32px;width:274px}}@media screen and (max-width:620px){.popup__submit-btn{width:238px}}.popup__submit-btn:hover{opacity:.8;transition:.2s linear}
 .popup_images{background:rgba(0,0,0,.9)}@media screen and (max-width:620px){.popup_images{top:-15px}}
 .popup__elements{position:relative}
 .popup__card{display:flex;flex-direction:column;margin:0;max-width:75vw}
@@ -40,7 +41,6 @@
 .popup__name{color:#fff;font-family:Inter;font-size:12px;font-style:normal;font-weight:400;line-height:15px;margin:10px 0 0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .form{box-sizing:border-box}
 .form__input{border:none;border-bottom:1px solid rgba(0,0,0,.2);border-radius:0;box-sizing:border-box;color:#000;font-family:Inter,‘Arial’,sans-serif;font-size:14px;font-style:normal;font-weight:400;line-height:17px;margin-bottom:30px;padding-bottom:13px;width:100%}@media screen and (max-width:940px){.form__input{margin-bottom:35px;padding:0 0 15px}}
-.form__submit-btn{background:#000;border:0;border-radius:2px;box-sizing:border-box;color:#fff;cursor:pointer;font-family:Inter,‘Arial’,sans-serif;font-size:18px;font-style:normal;font-weight:400;height:50px;line-height:22px;margin-top:18px;text-align:center;width:358px}@media screen and (max-width:940px){.form__submit-btn{font-size:14px;height:46px;line-height:17px;margin:25px 0 32px;width:274px}}@media screen and (max-width:620px){.form__submit-btn{width:238px}}.form__submit-btn:hover{opacity:.8;transition:.2s linear}
 .form__set{border-style:none;margin:0;padding:0}
 .form__field{display:flex;flex-direction:column;margin:0;position:relative}
 .form__button_inactive{background:none;border:1px solid #000;color:#000;opacity:.2;pointer-events:none;-webkit-user-select:none;-moz-user-select:none;user-select:none}
