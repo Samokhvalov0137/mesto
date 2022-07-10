@@ -37,6 +37,7 @@ class Card {
     this._photoCard = this._element.querySelector(".element__photo");
     this._cardLike = this._element.querySelector(".element__vector");
     this._cardTrash = this._element.querySelector(".element__trash");
+    this._cardTitle = this._element.querySelector(".element__title");
     this._cardLikesCounter = this._element.querySelector(
       ".element__vector-counter"
     );
@@ -48,10 +49,9 @@ class Card {
     }
 
     this._element.id = this._id;
-
-    this._element.querySelector(".element__title").textContent = this._name;
     this._photoCard.src = this._link;
     this._photoCard.alt = this._name;
+    this._cardTitle.textContent = this._name;
 
     this._setEventListeners();
 

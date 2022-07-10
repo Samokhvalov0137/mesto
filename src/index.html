@@ -76,7 +76,7 @@
                 <span id="error-form_status" class="error"></span>
               </label>
               <button
-                class="form__submit-btn"
+                class="popup__submit-btn"
                 type="submit"
                 id="form__edit-bth"
               >
@@ -104,7 +104,7 @@
                   class="form__input"
                   id="input_add_place"
                   type="text"
-                  name="form_name"
+                  name="form_place"
                   placeholder="Название"
                   required
                   minlength="2"
@@ -116,13 +116,13 @@
                   class="form__input"
                   id="input_add_link"
                   type="url"
-                  name="form_status"
+                  name="form_link"
                   placeholder="Ссылка"
                   required
                 />
                 <span id="error-input_add_link" class="error"></span>
               </label>
-              <button class="form__submit-btn" type="submit" id="form__add-bth">
+              <button class="popup__submit-btn" type="submit" id="form__add-bth">
                 Создать
               </button>
             </fieldset>
@@ -164,7 +164,7 @@
                 />
                 <span id="error-input_avatar_link" class="error"></span>
               </label>
-              <button class="form__submit-btn" type="submit" id="form__avatar-btn">
+              <button class="popup__submit-btn" type="submit" id="form__avatar-btn">
                 Сохранить
               </button>
             </fieldset>
@@ -178,13 +178,9 @@
         <button class="popup__close" id="popup-delete__close" type="button"></button>
         <div class="popup__input">
           <h2 class="popup__title">Вы уверены?</h2>
-          <form novalidate class="form">
-            <fieldset class="form__set">
-              <button class="form__submit-btn" type="submit" id="form__delete-btn">
-                Да
-              </button>
-            </fieldset>
-          </form>
+          <button class="popup__submit-btn" type="submit" id="form__delete-btn">
+            Да
+          </button>
         </div>
       </div>
     </div>

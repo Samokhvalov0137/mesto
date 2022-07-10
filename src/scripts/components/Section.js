@@ -1,8 +1,11 @@
 class Section {
   constructor({ renderer }, containerSelector) {
-    //this._items = items;
     this._renderer = renderer;
     this._container = document.querySelector(containerSelector);
+  }
+
+  addItem(element) {
+    this._container.prepend(element);
   }
 
   renderItems(items) {
@@ -11,8 +14,10 @@ class Section {
     });
   }
 
-  addItem(element) {
-    this._container.prepend(element);
+  reverseRenderItems(items) {
+    for (let i = items.length - 1; i >= 0; --i) {
+      this._renderer(items[i]);
+    }
   }
 }
 

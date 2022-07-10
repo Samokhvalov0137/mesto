@@ -1,4 +1,4 @@
-// массив карточек с фото и названиями
+// массив карточек с фото и названиями new
 const fetchSetupData = {
   baseUrl: "https://mesto.nomoreparties.co/v1/cohort-44",
   headers: {
@@ -10,7 +10,7 @@ const fetchSetupData = {
 const validationConfig = {
   formSelector: ".form",
   inputSelector: ".form__input",
-  submitButtonSelector: ".form__submit-btn",
+  submitButtonSelector: ".popup__submit-btn",
   inactiveButtonClass: "form__button_inactive",
   inputErrorClass: "form__input_type_error",
   errorClass: "form__set",
@@ -25,15 +25,17 @@ const jobInput = document.querySelector('input[name="form_status"]');
 //попап редактирования аватара
 const buttonOpenAvatar = document.querySelector(".profile__button-avatar");
 const popupCloseAvatar = document.querySelector("#popup-avatar__close");
-const popupAvatarEdit = ".popup_avatar";
-const formAvatar = document.querySelector('input[name="form_avatar"]');
-const formAvatarEdit = document.querySelector("#form__avatar");
-const popupDeleteSelector = ".popup_delete";
+
+const popupDeleteForm = ".popup_delete";
 const popupDeleteClose = document.querySelector("#popup-delete__close");
 // переменные попапа добавления карточки
 const popupCloseAddCard = document.querySelector("#popup-add__close");
 const popupOpenAddCard = document.querySelector(".profile__button-add");
 const elementsCard = ".elements";
+
+const profileName = document.querySelector(".profile__name");
+const profileStatus = document.querySelector(".profile__status");
+const profileAvatar = document.querySelector(".profile__avatar");
 
 // попап удаление карточек
 
@@ -47,12 +49,19 @@ const linkInput = document.querySelector("#input_add_link");
 
 const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
 
-const popupImageSelector = ".popup_images";
-const popupEditSelector = "#popup-edit";
-const formProfileEdit = document.querySelector("#form-edit");
 
-const popupAddSelector = "#popup-add";
-const popupFormAdd = document.querySelector("#form__add");
+const formAvatar = document.querySelector('input[name="form_avatar"]');
+
+
+const popupAvatarEdit = ".popup_avatar";
+const formAvatarEdit = document.querySelector(popupAvatarEdit).querySelector("form");
+
+const popupImageForm = ".popup_images";
+const popupEditForm = "#popup-edit";
+const formProfileEdit = document.querySelector(popupEditForm).querySelector("form");
+
+const popupAddForm = "#popup-add";
+const popupFormAdd = document.querySelector(popupAddForm).querySelector("form");
 
 const resetValidation = {};
 
@@ -68,10 +77,10 @@ export {
   placeInput,
   linkInput,
   popupCloseCardPhotoButton,
-  popupImageSelector,
-  popupEditSelector,
+  popupImageForm,
+  popupEditForm,
   formProfileEdit,
-  popupAddSelector,
+  popupAddForm,
   popupFormAdd,
   resetValidation,
   buttonOpenAvatar,
@@ -80,6 +89,9 @@ export {
   formAvatar,
   formAvatarEdit,
   fetchSetupData,
-  popupDeleteSelector,
+  popupDeleteForm,
   popupDeleteClose,
+  profileName,
+  profileStatus,
+  profileAvatar,
 };

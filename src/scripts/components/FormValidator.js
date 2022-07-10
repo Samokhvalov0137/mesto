@@ -69,10 +69,7 @@ class FormValidator {
     }
   }
 
-  _setEventListeners = () => {
-    this._formElement.addEventListener("submit", (evt) => {
-      evt.preventDefault();
-    });
+  _setEventListeners () {
     this.toggleButtonState();
     this._inputList.forEach((inputElement) => {
       inputElement.addEventListener("input", () => {
