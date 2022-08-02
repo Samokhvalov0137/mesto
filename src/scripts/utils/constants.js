@@ -18,6 +18,24 @@ const validationConfig = {
 
 const buttonOpenPopupEdit = document.querySelector(".profile__button-edit");
 
+const popupCloseEditButton = document.querySelector(".popup__close");
+const nameInput = document.querySelector('input[name="form_name"]');
+const jobInput = document.querySelector('input[name="form_status"]');
+
+const popupCloseAvatar = document.querySelector("#popup-avatar__close");
+const popupDeleteClose = document.querySelector("#popup-delete__close");
+// переменные попапа добавления карточки
+const popupCloseAddCard = document.querySelector("#popup-add__close");
+
+const placeInput = document.querySelector("#input_add_place");
+const linkInput = document.querySelector("#input_add_link");
+
+// попап просмотра картинки
+
+const popupCloseCardPhotoButton = document.querySelector("#popup-card__close");
+
+
+const formAvatar = document.querySelector('input[name="form_avatar"]');
 //попап редактирования аватара
 const buttonOpenAvatar = document.querySelector(".profile__button-avatar");
 
@@ -51,8 +69,15 @@ const resetValidation = {};
 export {
   validationConfig,
   buttonOpenPopupEdit,
+  popupCloseEditButton,
+  nameInput,
+  jobInput,
+  popupCloseAddCard,
   popupOpenAddCard,
   elementsCard,
+  placeInput,
+  linkInput,
+  popupCloseCardPhotoButton,
   popupImageForm,
   popupEditForm,
   formProfileEdit,
@@ -60,10 +85,13 @@ export {
   popupFormAdd,
   resetValidation,
   buttonOpenAvatar,
+  popupCloseAvatar,
   popupAvatarEdit,
+  formAvatar,
   formAvatarEdit,
   fetchSetupData,
   popupDeleteForm,
+  popupDeleteClose,
   profileName,
   profileStatus,
   profileAvatar,
